@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /* 登录、注册表单样式 */
+        
+        .container {
+            padding: 50px 0;
+        }
+        
+        .login-form,
+        .register-form {
+            padding: 30px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0063cc;
+        }
+        
+        .btn-success {
+            background-color: #28a745;
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 登录、注册表单 -->
+    <div class="container">
+        <h1 class="text-center mt-5">用户登录</h1>
+        <div class="row justify-content-center my-5">
+            <!-- 登录表单 -->
+            <div class="col-sm-8 col-lg-5 mx-2">
+                <form id="login-form" class="login-form">
+                    <h2>登录表单</h2>
+                    <div class="form-group">
+                        <label for="login-username">用户名</label>
+                        <input type="text" class="form-control" id="login-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">密码</label>
+                        <input type="password" class="form-control" id="login-password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">登录</button>
+                </form>
+            </div>
+
+            <!-- 注册表单 -->
+            <div class="col-sm-8 col-lg-5 mx-2">
+                <form id="register-form" class="register-form">
+                    <h2>注册表单</h2>
+                    <div class="form-group">
+                        <label for="register-username">用户名</label>
+                        <input type="text" class="form-control" id="register-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">密码</label>
+                        <input type="password" class="form-control" id="register-password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm-password">确认密码</label>
+                        <input type="password" class="form-control" id="register-confirm-password" name="confirm-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">注册</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- javascript -->
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        // 点击登录按钮时保存表单数据到本地存储  
+        $('#login-form').on('submit', function(event) {
+            // 阻止表单默认提交事件  
+            event.preventDefault();
+            // 获取表单数据  
+            var username = $('#login-username').val();
+            var password = $('#login-password').val();
+            // 保存到本地存储  
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+            // 跳转到首页  
+            window.location.href = './index.html';
+        });
+
+        // 点击注册按钮时保存表单数据到本地存储  
+        $('#register-form').on('submit', function(event) {
+            // 阻止表单默认提交事件  
+            event.preventDefault();
+            // 获取表单数据  
+            var username = $('#register-username').val();
+            var password = $('#register-password').val();
+            // 保存到本地存储  
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+            // 跳转到首页  
+            window.location.href = './index.html';
+        });
+    </script>
+
+</body>
+
+</html>
