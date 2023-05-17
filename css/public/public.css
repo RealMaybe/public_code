@@ -1,0 +1,309 @@
+/*
+ * @Author: RealMaybe 
+ * @Date: 2022-11-02 17:10:06 
+ * @Last Modified by: RealMaybe
+ * @Last Modified time: 2023-03-29 16:11:25
+ */
+
+
+/* Public Style */
+
+
+/* Margin & Padding */
+
+blockquote,
+body,
+button,
+dd,
+dl,
+dt,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+input,
+legend,
+li,
+ol,
+p,
+pre,
+td,
+textarea,
+th,
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+/* Unordered list */
+
+ul {
+    list-style: none;
+}
+
+
+/* Tag style */
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+
+/*
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
+    color: #000;
+} 
+*/
+
+i,
+em {
+    text-decoration: none;
+    font-style: normal;
+}
+
+
+/* h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+} */
+
+
+/* input,
+textarea {
+    outline: none;
+    border: none;
+    resize: none;
+} */
+
+
+/* Clearfix */
+
+.clear,
+.clearBoth,
+.clearfix {
+    clear: both;
+    overflow: hidden;
+}
+
+.clear:before,
+.clear:after,
+.clearBoth:before,
+.clearBoth:after,
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: block;
+    width: 0px;
+    height: 0px;
+    clear: both;
+    visibility: hidden;
+}
+
+
+/* border-box */
+
+
+/*
+* {
+    box-sizing: border-box;
+}
+*/
+
+
+/* Public width */
+
+.w {
+    margin: 0px auto;
+}
+
+.w1000 {
+    width: 1000px;
+    margin: 0px auto;
+}
+
+.w1100 {
+    width: 1100px;
+    margin: 0px auto;
+}
+
+.w1200 {
+    width: 1200px;
+    margin: 0px auto;
+}
+
+.w1400 {
+    width: 1400px;
+    margin: 0px auto;
+}
+
+
+/* Float */
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+
+/* display */
+
+.block {
+    display: block;
+}
+
+.none {
+    display: none;
+}
+
+.inline,
+.inline-block {
+    display: inline-block;
+}
+
+
+/* Position */
+
+.por,
+.po_r,
+.po-r {
+    position: relative;
+}
+
+.poa,
+.po_a,
+.po-a {
+    position: absolute;
+}
+
+.pof,
+.po_f,
+.po-f {
+    position: fixed;
+}
+
+
+/* Text align */
+
+.tal,
+.ta_l,
+.ta-l {
+    text-align: left;
+}
+
+.tac,
+.ta_c,
+.ta-c {
+    text-align: center;
+}
+
+.tar,
+.ta_r,
+.ta-r {
+    text-align: right;
+}
+
+
+/* Font size */
+
+.fs0,
+.fs_0,
+.fs-0 {
+    font-size: 0px;
+}
+
+.fs12,
+.fs_12,
+.fs-12 {
+    font-size: 12px;
+}
+
+.fs14,
+.fs_14,
+.fs-14 {
+    font-size: 14px;
+}
+
+.fs16,
+.fs_16,
+.fs-16 {
+    font-size: 16px;
+}
+
+.fs18,
+.fs_18,
+.fs-18 {
+    font-size: 18px;
+}
+
+.fs20,
+.fs_20,
+.fs-20 {
+    font-size: 20px;
+}
+
+.fs30,
+.fs_30,
+.fs-30 {
+    font-size: 30px;
+}
+
+.fs40,
+.fs_40,
+.fs-40 {
+    font-size: 40px;
+}
+
+.fs50,
+.fs_50,
+.fs-50 {
+    font-size: 50px;
+}
+
+.fs60,
+.fs_60,
+.fs-60 {
+    font-size: 60px;
+}
+
+.fs70,
+.fs_70,
+.fs-70 {
+    font-size: 70px;
+}
+
+.fs80,
+.fs_80,
+.fs-80 {
+    font-size: 80px;
+}
+
+.fs90,
+.fs_90,
+.fs-90 {
+    font-size: 90px;
+}
+
+.fs100,
+.fs_100,
+.fs-100 {
+    font-size: 100px;
+}

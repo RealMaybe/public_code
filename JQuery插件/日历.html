@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        (function() {
+            /*
+             * 鐢ㄤ簬璁板綍鏃ユ湡锛屾樉绀虹殑鏃跺€欙紝鏍规嵁dateObj涓殑鏃ユ湡鐨勫勾鏈堟樉绀�
+             */
+            var dateObj = (function() {
+                var _date = new Date(); // 榛樿涓哄綋鍓嶇郴缁熸椂闂�
+                return {
+                    getDate: function() {
+                        return _date;
+                    },
+                    setDate: function(date) {
+                        _date = date;
+                    }
+                };
+            })();
+
+            // 璁剧疆calendar div涓殑html閮ㄥ垎
+            renderHtml();
+            // 琛ㄦ牸涓樉绀烘棩鏈�
+            showCalendarData();
+            // 缁戝畾浜嬩欢
+            bindEvent();
+
+            /**
+             * 娓叉煋html缁撴瀯
+             */
+            function renderHtml() {
+                var calendar = document.getElementById("calendar");
+                var titleBox = document.createElement("div"); // 鏍囬鐩掑瓙 璁剧疆涓婁竴鏈� 涓嬩竴鏈� 鏍囬
+                var bodyBox = document.createElement("div"); // 琛ㄦ牸鍖� 鏄剧ず鏁版嵁
+
+                // 璁剧疆鏍囬鐩掑瓙涓殑html
+                titleBox.className = 'calendar-title-box';
+                titleBox.innerHTML = "<span class='prev-month' id='prevMonth'></span>" +
+                    "<span class='calendar-title' id='calendarTitle'></span>" +
+                    "<span id='nextMonth' class='next-month'></span>";
+                calendar.appendChild(titleBox); // 娣诲姞鍒癱alendar div涓�
+
+                // 璁剧疆琛ㄦ牸鍖虹殑html缁撴瀯
+                bodyBox.className = 'calendar-body-box';
+                var _headHtml = "<tr class='calendar-title'>" +
+                    "<th style='color:#db3c3d'>SUN</th>" +
+                    "<th>MON</th>" +
+                    "<th>TUE</th>" +
+                    "<th>WED</th>" +
+                    "<th>THU</th>" +
+                    "<th>FRI</th>" +
+                    "<th>SAT</th>" +
+                    "</tr>";
+                var _bodyHtml = "";
+
+                // 涓€涓湀鏈€澶�31澶╋紝鎵€浠ヤ竴涓湀鏈€澶氬崰6琛岃〃鏍�
+                for (var i = 0; i < 6; i++) {
+                    _bodyHtml += "<tr>" +
+                        "<td></td>" +
+                        "<td></td>" +
+                        "<td></td>" +
+                        "<td></td>" +
+                        "<td></td>" +
+                        "<td></td>" +
+                        "<td></td>" +
+                        "</tr>";
+                }
+                bodyBox.innerHTML = "<table id='calendarTable' class='calendar-table'>" +
+                    _headHtml + _bodyHtml +
+                    "</table>";
+                // 娣诲姞鍒癱alendar div涓�
+                calendar.appendChild(bodyBox);
+            }
+
+            /**
+             * 琛ㄦ牸涓樉绀烘暟鎹紝骞惰缃被鍚�
+             */
+            function showCalendarData() {
+                var _year = dateObj.getDate().getFullYear();
+                var _month = dateObj.getDate().getMonth() + 1;
+                var _dateStr = getDateStr(dateObj.getDate());
+
+                // 璁剧疆椤堕儴鏍囬鏍忎腑鐨� 骞淬€佹湀淇℃伅
+                var calendarTitle = document.getElementById("calendarTitle");
+                var titleStr = _dateStr.substr(0, 4) + "骞�" + _dateStr.substr(4, 2) + "鏈�";
+                calendarTitle.innerText = titleStr;
+
+                // 璁剧疆琛ㄦ牸涓殑鏃ユ湡鏁版嵁
+                var _table = document.getElementById("calendarTable");
+                var _tds = _table.getElementsByTagName("td");
+                var _firstDay = new Date(_year, _month - 1, 1); // 褰撳墠鏈堢涓€澶�
+                for (var i = 0; i < _tds.length; i++) {
+                    var _thisDay = new Date(_year, _month - 1, i + 1 - _firstDay.getDay());
+                    var _thisDayStr = getDateStr(_thisDay);
+                    _tds[i].innerText = _thisDay.getDate();
+                    //_tds[i].data = _thisDayStr;
+                    _tds[i].setAttribute('data', _thisDayStr);
+                    if (_thisDayStr == getDateStr(new Date())) { // 褰撳墠澶�
+                        _tds[i].className = 'currentDay';
+                    } else if (_thisDayStr.substr(0, 6) == getDateStr(_firstDay).substr(0, 6)) {
+                        _tds[i].className = 'currentMonth'; // 褰撳墠鏈�
+                    } else { // 鍏朵粬鏈�
+                        _tds[i].className = 'otherMonth';
+                    }
+                }
+            }
+
+            /**
+             * 缁戝畾涓婁釜鏈堜笅涓湀浜嬩欢
+             */
+            function bindEvent() {
+                var prevMonth = document.getElementById("prevMonth");
+                var nextMonth = document.getElementById("nextMonth");
+                addEvent(prevMonth, 'click', toPrevMonth);
+                addEvent(nextMonth, 'click', toNextMonth);
+            }
+
+            /**
+             * 缁戝畾浜嬩欢
+             */
+            function addEvent(dom, eType, func) {
+                if (dom.addEventListener) { // DOM 2.0
+                    dom.addEventListener(eType, function(e) {
+                        func(e);
+                    });
+                } else if (dom.attachEvent) { // IE5+
+                    dom.attachEvent('on' + eType, function(e) {
+                        func(e);
+                    });
+                } else { // DOM 0
+                    dom['on' + eType] = function(e) {
+                        func(e);
+                    }
+                }
+            }
+
+            /**
+             * 鐐瑰嚮涓婁釜鏈堝浘鏍囪Е鍙�
+             */
+            function toPrevMonth() {
+                var date = dateObj.getDate();
+                dateObj.setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1));
+                showCalendarData();
+            }
+
+            /**
+             * 鐐瑰嚮涓嬩釜鏈堝浘鏍囪Е鍙�
+             */
+            function toNextMonth() {
+                var date = dateObj.getDate();
+                dateObj.setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1));
+                showCalendarData();
+            }
+
+            /**
+             * 鏃ユ湡杞寲涓哄瓧绗︿覆锛� 4浣嶅勾+2浣嶆湀+2浣嶆棩
+             */
+            function getDateStr(date) {
+                var _year = date.getFullYear();
+                var _month = date.getMonth() + 1; // 鏈堜粠0寮€濮嬭鏁�
+                var _d = date.getDate();
+
+                _month = (_month > 9) ? ("" + _month) : ("0" + _month);
+                _d = (_d > 9) ? ("" + _d) : ("0" + _d);
+                return _year + _month + _d;
+            }
+        })();
+    </script>
+</body>
+
+</html>

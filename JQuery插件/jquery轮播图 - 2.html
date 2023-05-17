@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .w1000 {
+            width: 1000px;
+            margin: 0 auto;
+        }
+        
+        main {
+            width: 100%;
+        }
+        
+        .banner {
+            position: relative;
+            width: 1000px;
+            height: 300px;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+        
+        .banner_img {
+            position: relative;
+            width: 6000px;
+        }
+        
+        .banner_img li {
+            float: left;
+            width: 1000px;
+            height: 300px;
+        }
+        
+        .banner_dot {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            width: 110px;
+            height: 20px;
+            margin-left: -50px;
+            padding: 0 5px;
+            background-color: rgba(255, 255, 255, .4);
+            border-radius: 10px;
+            clear: both;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        
+        .banner_dot li {
+            float: left;
+            width: 10px;
+            height: 10px;
+            margin: 5px;
+            background-color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .banner_dot li.on {
+            background-color: #f00;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="w1000 banner">
+            <ul class="banner_img clearfix">
+                <li>
+                    <p class="IMG" style="width: 1000px; height: 300px; font-size: 100px; text-align: center; line-height: 300px; background: skyblue;">IMG 1</p>
+                </li>
+                <li>
+                    <p class="IMG" style="width: 1000px; height: 300px; font-size: 100px; text-align: center; line-height: 300px; background: pink;">IMG 2</p>
+                </li>
+                <li>
+                    <p class="IMG" style="width: 1000px; height: 300px; font-size: 100px; text-align: center; line-height: 300px; background: orange;">IMG 3</p>
+                </li>
+                <li>
+                    <p class="IMG" style="width: 1000px; height: 300px; font-size: 100px; text-align: center; line-height: 300px; background: violet;">IMG 4</p>
+                </li>
+                <li>
+                    <p class="IMG" style="width: 1000px; height: 300px; font-size: 100px; text-align: center; line-height: 300px; background: greenyellow;">IMG 5</p>
+                </li>
+                <li>
+                    <p class="IMG" style="width: 1000px; height: 300px; font-size: 100px; text-align: center; line-height: 300px; background: skyblue;">IMG 1</p>
+                </li>
+            </ul>
+            <ul class="banner_dot">
+                <li class="on"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </main>
+
+    <script>
+        $(function() {
+            var index = 0;
+            // 建立图片的索引号
+
+            var timer = null;
+            // 建立一个定时器
+
+            var option = $(".banner_img li").length;
+            // 获取轮播的图片的长度
+
+            var imgwidth = $(".banner_img li").width();
+            //获取图片的宽度
+
+            //当鼠标移入时两侧的箭头显现，移除时消失并且移入时定时器停止，移除时定时器开启
+            $(".banner").hover(function() {
+                // $(".dianji li").show();
+                clearInterval(timer)
+            }, function() {
+                // $(".dianji li").hide();
+                go();
+
+            });
+
+            //设置定时器，并用go函数封装，实现函数的自动播放
+            function go() {
+                timer = setInterval(function() {
+                    if (index < option) {
+                        index++;
+                        // 当索引号小于图片张数时，索引号加一
+                        $(".banner_img").stop().animate({
+                            left: -imgwidth * index + "px"
+                        })
+                    }
+                    if (index == option) {
+                        $(".banner_img").stop().animate({
+                            left: -imgwidth * index + "px"
+                        })
+
+                        index = 0;
+                        $(".banner_img").animate({
+                            left: -imgwidth * index + "px"
+                        }, 0)
+                    }
+                    //  实现下边小圆点的切换
+                    $(".banner_dot li").eq(index).addClass("on").siblings().removeClass("on");
+                }, 3000)
+            };
+
+            //右侧点击事件
+            function right() {
+                $(".right").click(function() {
+                    if (index < option) {
+                        index++;
+                        // 当索引号小于图片张数时，索引号加一
+                        $(".banner_img").stop().animate({
+                            left: -imgwidth * index + "px"
+                        })
+                    }
+                    if (index == option) {
+                        $(".banner_img").stop().animate({
+                                left: -imgwidth * index + "px"
+                            })
+                            //当索引号等于图片张数时，这时候放到了重复的那张图片.这个时候可以先执行动画函数让其到这张重复的图片，
+                            //然后让索引号变为0，快速的跳转到真正第一张图
+                        index = 0;
+                        $(".banner_img").animate({
+                            left: -imgwidth * index + "px"
+                        }, 0)
+                    }
+                    //  实现下边小圆点的切换
+                    $(".banner_dot li").eq(index).addClass("current").siblings().removeClass("om");
+                });
+            };
+            right();
+            //调用函数right
+
+
+            // 左侧点击事件
+            function left() {
+                $(".left").click(function() {
+                    if (index > 0) {
+                        index--;
+                        $(".banner_img").animate({
+                            left: -imgwidth * index + "px"
+                        })
+                    } else if (index == 0) {
+                        index = option;
+                        $(".banner_img").animate({
+                            left: -imgwidth * index + "px"
+                        }, 0)
+                        index = option - 1;
+                        $(".banner_img").animate({
+                            left: -imgwidth * index + "px"
+                        })
+                    };
+                    //同样的在左侧点击事件中，当此时是在第一张图时，让index=option（图片书）
+                    //相当于是最后一张虚拟图（和第一张重复）
+                    //那么先快速的跳转到虚拟的第一张图，然后让索引号减一。
+                    //接下来在执行动画函数，此时就切换到了最后一张图
+                    $(".banner_dot li").eq(index).addClass("current").siblings().removeClass("on");
+                });
+            };
+            left();
+            //调用函数left
+
+
+            // 点击小圆点实现图片的跳转
+            $(".banner_dot li").click(function() {
+                index = $(this).index();
+                $(".banner_img").animate({
+                    left: -imgwidth * index + "px"
+                });
+                $(".banner_dot li").eq(index).addClass("on").siblings().removeClass("on");
+            });
+        });
+    </script>
+</body>
+
+</html>
