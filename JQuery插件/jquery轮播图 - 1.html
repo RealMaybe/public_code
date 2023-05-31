@@ -103,9 +103,8 @@
     </main>
 
     <script>
-        /* banner */
-
-        var index = 0;
+        let index = 0;
+        let time = 3000;
 
         function move() {
             index += 1;
@@ -116,11 +115,11 @@
             $(".banner_dot li").eq(index).addClass("on").siblings().removeClass("on");
         };
 
-        var x = setInterval(move, 10000);
+        let x = setInterval(move, time);
         $(".banner_img").hover(function() {
             clearInterval(x);
         }, function() {
-            x = setInterval(move, 10000);
+            x = setInterval(move, time);
         });
 
         $(".banner_dot li").on("click", function() {
@@ -132,7 +131,7 @@
         $(".banner_dot li").hover(function() {
             clearInterval(x);
         }, function() {
-            x = setInterval(move, 10000);
+            x = setInterval(move, time);
         });
     </script>
 </body>
