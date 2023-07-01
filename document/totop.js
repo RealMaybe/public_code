@@ -15,10 +15,9 @@ totop.onclick = function() {
 
 /* 回到顶部 */
 $(".returnTop").click(function() {
-    /* 回到顶部 */
     var height = document.documentElement.scrollTop || document.body.scrollTop;
     var t = setInterval(() => {
-        // 如果需要回到顶部的缓动效果，这里的 -= 的值可以设置的小一点
+        /* 如果需要回到顶部的缓动效果，这里的 -= 的值可以设置的小一点 */
         height -= 500;
         if (height > 0) {
             window.scrollTo(0, height);
