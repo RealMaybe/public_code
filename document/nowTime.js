@@ -31,6 +31,7 @@ function doubleNum(n) {
     }
 };
 
+// 调用
 setInterval(function() {
     let oTime = document.getElementById("div1");
     oTime.innerHTML = showTime();

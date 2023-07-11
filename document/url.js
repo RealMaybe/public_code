@@ -14,8 +14,6 @@ function updateUrlParams(params) {
     window.history.replaceState(null, '', newUrl);
 };
 
-updateUrlParams({ user: 1, uid: 18 });
-
 // get url
 // 获取url中的参数，并输出一个对象
 function parseUrlParams() {
@@ -36,5 +34,10 @@ function parseUrlParams() {
     return params;
 };
 
+// 调用示例
+// set
+updateUrlParams({ user: 1, uid: 18 });
+
+// get
 const params = parseUrlParams();
 console.log(params);

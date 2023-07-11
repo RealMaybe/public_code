@@ -28,3 +28,12 @@
 $(".textarea").autoTextarea({
     maxHeight: 220, //文本框是否自动撑高，默认：null，不自动撑高；如果自动撑高必须输入数值，该值作为文本框自动撑高的最大高度
 });
+
+
+// 调用实例
+$("textarea").attr("maxlength", 10000).on("input keyup", function() {
+    let textLength = $(this).val().trim().length; // 去除首尾空格后的总长度
+    $("span.length").text(textLength); // 当前字数显示
+}).autoTextarea({
+    maxHeight: 500
+});
