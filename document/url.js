@@ -36,7 +36,7 @@ function parseUrlParams() {
 
 // 调用示例
 // set
-updateUrlParams({ user: 1, uid: 18 });
+updateUrlParams({ user: 1, uid: 100011 });
 
 // get
 const params = parseUrlParams();
