@@ -1,3 +1,5 @@
+// 当前时间显示
+
 function showTime() {
     let d = new Date();
     let year = d.getFullYear();
