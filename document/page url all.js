@@ -73,9 +73,7 @@ function parseUrlParams(judge, url) {
 /* 调用示例 */
 /* set */
 updateUrlParams(1, { uid: 1001, user: 1 });
-console.log(
-    updateUrlParams(0, { uid: 1001, user: 1 }, "http:127.0.0.1:550")
-);
+console.log(updateUrlParams(0, { uid: 1001, user: 1 }, "http:127.0.0.1:550"));
 
 /* get */
 console.log(parseUrlParams(0));
