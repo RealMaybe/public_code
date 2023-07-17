@@ -4,7 +4,11 @@
  * 需要传入三个参数：judge, params, url
  * 如果judge的值为true, 则获取指定页面的url, 需要传入url
  * 如果judge的值为false, 则获取当前页面的url, 不需要传入url
- * params参数始终需要传入，该参数格式为一个对象
+ * 
+ * 参数对应格式：
+ * judeg: 布尔值
+ * params: 对象
+ * url: 字符串
  */
 function updateUrlParams(judge, params, url) {
     const searchParams = new URLSearchParams();
@@ -36,6 +40,10 @@ function updateUrlParams(judge, params, url) {
  * 该函数需要传入两个参数：judge, url
  * 如果judge的值为true, 则获取指定页面的url, 需要传入url
  * 如果judge的值为false, 则获取当前页面的url, 不需要传入url
+ * 
+ * 参数对应格式：
+ * judeg: 布尔值
+ * url: 字符串
  */
 function parseUrlParams(judge, url) {
     let search, queryString;
