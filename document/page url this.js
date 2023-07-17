@@ -1,5 +1,5 @@
-// set url
-// 设置url中的参数，需要以对象的形式输入
+/* set url */
+/* 该函数用于设置url中的参数， 需要以对象的形式输入 */
 function updateUrlParams(params) {
     const searchParams = new URLSearchParams();
 
@@ -14,8 +14,8 @@ function updateUrlParams(params) {
     window.history.replaceState(null, '', newUrl);
 };
 
-// get url
-// 获取url中的参数，并输出一个对象
+/* get url */
+/* 获取url中的参数，并输出一个对象 */
 function parseUrlParams() {
     const search = window.location.search;
 
