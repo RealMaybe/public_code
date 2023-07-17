@@ -68,15 +68,15 @@ function parseUrlParams(judge, url) {
     }
 
     return params;
-}
+};
 
 /* 调用示例 */
 /* set */
 updateUrlParams(1, { uid: 1001, user: 1 });
 console.log(
     updateUrlParams(0, { uid: 1001, user: 1 }, "http:127.0.0.1:550")
-)
+);
 
 /* get */
 console.log(parseUrlParams(0));
-console.log(parseUrlParams(1, "http:127.0.0.1:550?uid=100000001&user=4"))
+console.log(parseUrlParams(1, "http:127.0.0.1:550?uid=100000001&user=4"));
