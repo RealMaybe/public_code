@@ -48,3 +48,19 @@ $("textarea").attr("maxlength", 10000).on("input keyup", function() {
 function getFormatCode(strValue) {
     return strValue.replace(/\r\n/g, "<br/>").replace(/\n/g, "<br/>").replace(/\s/g, " ");
 };
+
+
+/* 代码压缩 */
+/* 文本自适应高度 */
+! function(t) {
+    t.fn.autoTextarea = function(e) {
+        let i = { maxHeight: null, minHeight: t(this).height() },
+            h = t.extend({}, i, e);
+        return t(this).each(function() {
+            t(this).bind("paste cut keydown keyup focus blur", function() {
+                let t, e = this.style;
+                this.style.height = h.minHeight + "px", this.scrollHeight > h.minHeight && (h.maxHeight && this.scrollHeight > h.maxHeight ? (t = h.maxHeight, e.overflowY = "scroll") : (t = this.scrollHeight, e.overflowY = "hidden"), e.height = t + "px")
+            })
+        })
+    }
+}(jQuery);
