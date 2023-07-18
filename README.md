@@ -48,7 +48,8 @@ public
 │   ├─paita.js
 │   ├─random.js
 │   ├─textarea.js
-│   └─totop.js
+│   ├─totop.js
+│   └─url.js
 ├─jQuery插件
 │   ├─全屏轮播
 │   ├─打字机效果.html
