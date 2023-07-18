@@ -1,14 +1,10 @@
 /* 
  * set url 
  * 该函数可设定当前页面或指定页面url地址
- * 需要传入三个参数：judge, params, url
- * 如果judge的值为true, 则获取指定页面的url, 需要传入url
- * 如果judge的值为false, 则获取当前页面的url, 不需要传入url
- * 
- * 参数对应格式：
- * judeg: 布尔值
- * params: 对象
- * url: 字符串
+ * 函数接受三个参数：
+ * judge：一个布尔值，用于判断是否获取指定页面的URL
+ * params：一个对象，包含要更新的查询参数的键值对
+ * url：一个字符串，表示指定页面的URL（当judge为true时需要传入）。
  */
 function updateUrlParams(judge, params, url) {
     const searchParams = new URLSearchParams();
@@ -37,13 +33,9 @@ function updateUrlParams(judge, params, url) {
 
 /* 
  * get url
- * 该函数需要传入两个参数：judge, url
- * 如果judge的值为true, 则获取指定页面的url, 需要传入url
- * 如果judge的值为false, 则获取当前页面的url, 不需要传入url
- * 
- * 参数对应格式：
- * judeg: 布尔值
- * url: 字符串
+ * 函数接受两个参数：
+ * judge：一个布尔值，用于判断是否解析指定页面的URL。
+ * url：一个字符串，表示指定页面的URL（当judge为true时需要传入）。
  */
 function parseUrlParams(judge, url) {
     let search, queryString;

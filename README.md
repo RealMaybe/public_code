@@ -26,15 +26,12 @@ public公共代码，多个内容中均可调用，更新频率随缘。
         4. page url all.js中为兼容代码，传入布尔值用于判断，可获取和修改当前或指定页面url地址
             - 设定指定url地址时，最后内容建议设定到指定的超链接标签中，或通过js跳转
     2. 加入index.html文件，内容空白
-    3. 加入test.html文件，用于测试，该文件不会上传至git仓库
 - **本更新日志从2023/7/17开始记录，之前的更新内容不再记录。**
 
 ## 结构树形图
 
 ```txt
 public
-├─.vscode
-│   ├─settings.json
 ├─document
 │   ├─canvas code.js
 │   ├─code.js
@@ -67,6 +64,5 @@ public
 ├─.gitignore
 ├─index.html
 ├─LICENSE
-├─README.md
-└─test.html
+└─README.md
 ```
