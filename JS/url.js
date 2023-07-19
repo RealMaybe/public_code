@@ -1,22 +1,25 @@
-function updateUrlParams(t, n, o) {
+/* set url */
+function updateUrlParams(o, t, n) {
     const e = new URLSearchParams;
-    for (const [t, o] of Object.entries(n)) e.append(t, o);
+    for (const [o, n] of Object.entries(t)) e.append(o, n);
     const a = e.toString();
-    let r, c, s;
-    ({ protocol: r, host: c, pathname: s } = t ? new URL(o) : window.location);
-    const i = `${r}//${c}${s}?${a}`;
-    if (t) return i;
-    window.history.replaceState(null, "", i)
+    let r, c, i, s = window.location.href;
+    o ? n.indexOf("./") >= 0 ? ({ protocol: r, host: c, pathname: i } = new URL(n, s)) : ({ protocol: r, host: c, pathname: i } = new URL(n)) : ({ protocol: r, host: c, pathname: i } = window.location);
+    const l = `${r}//${c}${i}?${a}`;
+    if (o) return l;
+    window.history.replaceState(null, "", l)
 }
 
-function parseUrlParams(t, n) {
-    let o, e;
-    const r = {};
-    if (!(e = t ? new URLSearchParams(new URL(n).search).toString() : (o = window.location.search).substr(1))) return {};
-    const s = e.split("&");
-    for (const t of s) {
-        const [n, o] = t.split("=");
-        r[n] = decodeURIComponent(o)
+/* get url */
+function parseUrlParams(n, e) {
+    let r, o, t;
+    const s = {};
+    let a = window.location.href;
+    if (!(t = n ? (o = e.indexOf("./") >= 0 ? new URLSearchParams(new URL(e, a).search) : new URLSearchParams(new URL(e).search)).toString() : (r = window.location.search).substr(1))) return {};
+    const c = t.split("&");
+    for (const n of c) {
+        const [e, r] = n.split("=");
+        s[e] = decodeURIComponent(r)
     }
-    return r
+    return s
 }

@@ -16,10 +16,29 @@ function updateUrlParams(judge, params, url) {
     const newSearch = searchParams.toString();
     let protocol, host, pathname;
 
+    let this_url = window.location.href;
+
     if (judge) {
-        ({ protocol, host, pathname } = new URL(url));
+        /* 判断传入的url地址是路径形式还是url形式 */
+        if (url.indexOf("./") >= 0) {
+            ({
+                protocol,
+                host,
+                pathname
+            } = new URL(url, this_url));
+        } else {
+            ({
+                protocol,
+                host,
+                pathname
+            } = new URL(url));
+        }
     } else {
-        ({ protocol, host, pathname } = window.location);
+        ({
+            protocol,
+            host,
+            pathname
+        } = window.location);
     }
 
     const newUrl = `${protocol}//${host}${pathname}?${newSearch}`;
@@ -31,6 +50,7 @@ function updateUrlParams(judge, params, url) {
     }
 };
 
+
 /* 
  * get url
  * 函数接受两个参数：
@@ -38,11 +58,17 @@ function updateUrlParams(judge, params, url) {
  * url：一个字符串，表示指定页面的URL（当judge为true时需要传入）。
  */
 function parseUrlParams(judge, url) {
-    let search, queryString;
+    let search, searchParams, queryString;
     const params = {};
 
+    let this_url = window.location.href;
+
     if (judge) {
-        const searchParams = new URLSearchParams(new URL(url).search);
+        if (url.indexOf("./") >= 0) {
+            searchParams = new URLSearchParams(new URL(url, this_url).search);
+        } else {
+            searchParams = new URLSearchParams(new URL(url).search);
+        }
         queryString = searchParams.toString();
     } else {
         search = window.location.search;

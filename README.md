@@ -14,6 +14,16 @@ public公共代码，多个内容中均可调用，更新频率随缘。
 
 ## 更新日志
 
+- **2023/7/19**
+    更新内容：
+    1. url.js 小更新
+        1. document/page url all.js 小更新
+        2. JS/url.js 小更新
+        3. 更新具体内容如下：为防止传入的url地址并非直接是url形式，而是路径形式，所以在对传入的url进行操作的时候加入了检测传入url参数的形式
+    2. 删除了document/page url other.js
+    3. 删除了document/page url this.js
+    4. 将document/page url all.js修改为document/url.js
+    5. 更新了结构树形图
 - **2023/7/18**
     更新内容：
     1. 重整文件列表
@@ -44,13 +54,11 @@ public
 │   ├─ip.js
 │   ├─listGetRandomltem.js
 │   ├─nowTime.js
-│   ├─page url all.js
-│   ├─page url other.js
-│   ├─page url this.js
 │   ├─paita.js
 │   ├─random.js
 │   ├─textarea.js
-│   └─totop.js
+│   ├─totop.js
+│   └─url.js
 ├─jQuery插件
 │   ├─全屏轮播
 │   ├─打字机效果.html
