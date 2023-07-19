@@ -1,0 +1,1 @@
+function code(o){let t="",r=[],n=[0,1,2,3,4,5,6,7,8,9];r=r.concat(n);for(let o=65;o<=90;o++)r.push(String.fromCharCode(o));r=r.concat(n);for(let o=97;o<=122;o++)r.push(String.fromCharCode(o));r=r.concat(n);for(let n=0;n<o;n++)t+=r[Math.floor(Math.random()*r.length)];return t}

@@ -14,6 +14,11 @@ public公共代码，多个内容中均可调用，更新频率随缘。
 
 ## 更新日志
 
+- **2023/7/18**
+    更新内容：
+    1. 重整文件列表
+        1. 将压缩后的js文件放在了JS/文件夹内
+        2. document/文件夹内保留原本的文件内容
 - **2023/7/17**
     更新内容：
     1. url.js 大更新
@@ -45,8 +50,7 @@ public
 │   ├─paita.js
 │   ├─random.js
 │   ├─textarea.js
-│   ├─totop.js
-│   └─url.js
+│   └─totop.js
 ├─jQuery插件
 │   ├─全屏轮播
 │   ├─打字机效果.html
@@ -54,6 +58,11 @@ public
 │   ├─jquery tab2.html
 │   ├─jquery轮播图 - 1.html
 │   └─jquery轮播图 - 2.html
+├─JS
+│   ├─code.js
+│   ├─ip.js
+│   ├─textarea.js
+│   └─url.js
 ├─public
 │   ├─css
 │   │   ├─public.css
