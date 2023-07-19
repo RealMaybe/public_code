@@ -17,17 +17,17 @@ function updateUrlParams(judge, params, url) {
     let protocol, host, pathname;
 
     if (judge) {
-        ({ protocol, host, pathname } = window.location);
-    } else {
         ({ protocol, host, pathname } = new URL(url));
+    } else {
+        ({ protocol, host, pathname } = window.location);
     }
 
     const newUrl = `${protocol}//${host}${pathname}?${newSearch}`;
 
     if (judge) {
-        window.history.replaceState(null, '', newUrl);
-    } else {
         return newUrl;
+    } else {
+        window.history.replaceState(null, '', newUrl);
     }
 };
 
