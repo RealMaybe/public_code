@@ -15,7 +15,6 @@ function updateUrlParams(judge, params, url) {
 
     const newSearch = searchParams.toString();
     let protocol, host, pathname;
-
     let this_url = window.location.href;
 
     if (judge) {
@@ -59,9 +58,8 @@ function updateUrlParams(judge, params, url) {
  */
 function parseUrlParams(judge, url) {
     let search, searchParams, queryString;
-    const params = {};
-
     let this_url = window.location.href;
+    const params = {};
 
     if (judge) {
         if (url.indexOf("./") >= 0) {
