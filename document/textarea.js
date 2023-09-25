@@ -38,6 +38,35 @@ $("textarea").attr("maxlength", 10000).on("input keyup", function() {
     maxHeight: 500
 });
 
+/* 原生js函数 */
+function autoTextarea(element, options) {
+    let defaults = {
+        maxHeight: null,
+        minHeight: element.clientHeight
+    };
+    let opts = Object.assign({}, defaults, options);
+
+    element.addEventListener("input", function() {
+        element.style.height = opts.minHeight + "px";
+        if (element.scrollHeight > opts.minHeight) {
+            if (opts.maxHeight && element.scrollHeight > opts.maxHeight) {
+                element.style.overflowY = "scroll";
+                element.style.height = opts.maxHeight + "px";
+            } else {
+                element.style.overflowY = "hidden";
+                element.style.height = element.scrollHeight + "px";
+            }
+        }
+    });
+}
+
+let textareaElement = document.querySelector("textarea");
+autoTextarea(textareaElement, {
+    maxHeight: 600,
+    minHeight: 100
+});
+
+
 /*
  * 根据Value格式化为带有换行、空格格式的HTML代码
  * @param strValue {String} 需要转换的值
