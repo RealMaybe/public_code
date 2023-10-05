@@ -1,10 +1,15 @@
 /** 
  * set url 
+ * @author RealMaybe <realmaybe0429@qq.com>
  * 该函数可设定当前页面或指定页面url地址
  * 函数接受三个参数：
- * @param { boolean } judge, 布尔值, 用于判断是否获取指定页面的URL
- * @param { object } params, 对象, 包含要更新的查询参数的键值对
- * @param { string } url, 字符串, 表示指定页面的URL（当judge为true时需要传入）
+ * @param { boolean } judge 布尔值, 用于判断是否获取指定页面的URL
+ * @param { object } params 对象, 包含要更新的查询参数的键值对
+ * @param { string } url 字符串, 表示指定页面的URL（当judge为true时需要传入）
+ * @exapmle
+ * updateUrlParams(0, { uid: 1001, user: 1 });
+ * @exapmle
+ * updateUrlParams(1, { uid: 1001, user: 1 }, "http:127.0.0.1:550")
  */
 function updateUrlParams(judge, params, url) {
     const searchParams = new URLSearchParams();
@@ -37,10 +42,15 @@ function updateUrlParams(judge, params, url) {
 
 /**
  * get url
+ * @author RealMaybe <realmaybe0429@qq.com>
  * 该函数可获取当前或指定页面URL地址中的参数
  * 函数接受两个参数：
- * @param { boolean } judge, 布尔值, 用于判断是否解析指定页面的URL
- * @param { string } url, 字符串, 表示指定页面的URL（当judge为true时需要传入）
+ * @param { boolean } judge 布尔值, 用于判断是否解析指定页面的URL
+ * @param { string } url 字符串, 表示指定页面的URL（当judge为true时需要传入）
+ * @example
+ * parseUrlParams(0)
+ * @exapmle
+ * parseUrlParams(1, "http:127.0.0.1:550?uid=100000001&user=4")
  */
 function parseUrlParams(judge, url) {
     let search, searchParams, queryString, this_url = window.location.href;

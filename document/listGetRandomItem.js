@@ -7,7 +7,7 @@ function listGetRandomItem(list, remove) {
     }
 };
 
-/*
+/**
  * 这段JavaScript代码定义了一个函数listGetRandomItem，它接受两个参数：list和remove。
  * 函数的作用是从给定的列表中随机获取一个元素并返回。
  * 代码中使用了Math.random()函数生成一个0到1之间的随机数，将其乘以列表的长度list.length，并通过Math.floor()函数取整，得到一个范围在0到列表长度减1之间的随机整数x。这个整数指示了将要获取的随机元素在列表中的索引位置。
