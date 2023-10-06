@@ -1,4 +1,4 @@
-// textarea文本框自适应高度
+/* textarea文本框自适应高度 */
 (function($) {
     $.fn.autoTextarea = function(options) {
         let defaults = {
@@ -9,34 +9,21 @@
         return $(this).each(function() {
             $(this).bind("paste cut keydown keyup focus blur", function() {
                 let height, style = this.style;
-                this.style.height = opts.minHeight + 'px';
+                this.style.height = opts.minHeight + "px";
                 if (this.scrollHeight > opts.minHeight) {
                     if (opts.maxHeight && this.scrollHeight > opts.maxHeight) {
                         height = opts.maxHeight;
-                        style.overflowY = 'scroll';
+                        style.overflowY = "scroll";
                     } else {
                         height = this.scrollHeight;
-                        style.overflowY = 'hidden';
+                        style.overflowY = "hidden";
                     }
-                    style.height = height + 'px';
+                    style.height = height + "px";
                 }
             });
         });
     };
 })(jQuery);
-
-// 调用实例
-$(".textarea").autoTextarea({
-    maxHeight: 220, //文本框是否自动撑高，默认：null，不自动撑高；如果自动撑高必须输入数值，该值作为文本框自动撑高的最大高度
-});
-
-// 调用实例
-$("textarea").attr("maxlength", 10000).on("input keyup", function() {
-    let textLength = $(this).val().trim().length; // 去除首尾空格后的总长度
-    $("span.length").text(textLength); // 当前字数显示
-}).autoTextarea({
-    maxHeight: 500
-});
 
 /* 原生js函数 */
 function autoTextarea(element, options) {
@@ -58,16 +45,9 @@ function autoTextarea(element, options) {
             }
         }
     });
-}
+};
 
-let textareaElement = document.querySelector("textarea");
-autoTextarea(textareaElement, {
-    maxHeight: 600,
-    minHeight: 100
-});
-
-
-/*
+/** 
  * 根据Value格式化为带有换行、空格格式的HTML代码
  * @param strValue {String} 需要转换的值
  * @return  {String}转换后的HTML代码
@@ -78,18 +58,13 @@ function getFormatCode(strValue) {
     return strValue.replace(/\r\n/g, "<br/>").replace(/\n/g, "<br/>").replace(/\s/g, " ");
 };
 
+/* 调用实例 */
+$(".textarea").autoTextarea({ maxHeight: 220 });
 
-/* 代码压缩 */
-/* 文本自适应高度 */
-! function(t) {
-    t.fn.autoTextarea = function(e) {
-        let i = { maxHeight: null, minHeight: t(this).height() },
-            h = t.extend({}, i, e);
-        return t(this).each(function() {
-            t(this).bind("paste cut keydown keyup focus blur", function() {
-                let t, e = this.style;
-                this.style.height = h.minHeight + "px", this.scrollHeight > h.minHeight && (h.maxHeight && this.scrollHeight > h.maxHeight ? (t = h.maxHeight, e.overflowY = "scroll") : (t = this.scrollHeight, e.overflowY = "hidden"), e.height = t + "px")
-            })
-        })
-    }
-}(jQuery);
+$("textarea").attr("maxlength", 10000).on("input keyup", function() {
+    let textLength = $(this).val().trim().length; /* 去除首尾空格后的总长度 */
+    $("span.length").text(textLength); /* 当前字数显示 */
+}).autoTextarea({ maxHeight: 500 });
+
+let textareaElement = document.querySelector("textarea");
+autoTextarea(textareaElement, { maxHeight: 600, minHeight: 100 });

@@ -1,24 +1,5 @@
 /* set url */
-function updateUrlParams(o, n, t) {
-    const e = new URLSearchParams;
-    for (const [o, t] of Object.entries(n)) e.append(o, t);
-    const r = e.toString();
-    let a, c, s, i = window.location.href;
-    o ? t.indexOf("./") >= 0 ? ({ protocol: a, host: c, pathname: s } = new URL(t, i)) : ({ protocol: a, host: c, pathname: s } = new URL(t)) : ({ protocol: a, host: c, pathname: s } = window.location);
-    const w = `${a}//${c}${s}?${r}`;
-    if (o) return w;
-    window.history.replaceState(null, "", w)
-}
+function updateUrlParams(o,t,n){const e=new URLSearchParams;for(const[o,n]of Object.entries(t))e.append(o,n);const a=e.toString();let r,c,i,s=window.location.href;o?n.indexOf("./")>=0?({protocol:r,host:c,pathname:i}=new URL(n,s)):({protocol:r,host:c,pathname:i}=new URL(n)):({protocol:r,host:c,pathname:i}=window.location);const l=`${r}//${c}${i}?${a}`;if(o)return l;window.history.replaceState(null,"",l)}
 
 /* get url */
-function parseUrlParams(o, n) {
-    let t, e, r, a = window.location.href;
-    const c = {};
-    if (!(r = o ? (e = n.indexOf("./") >= 0 ? new URLSearchParams(new URL(n, a).search) : new URLSearchParams(new URL(n).search)).toString() : (t = window.location.search).substr(1))) return {};
-    const s = r.split("&");
-    for (const o of s) {
-        const [n, t] = o.split("=");
-        c[n] = decodeURIComponent(t)
-    }
-    return c
-}
+function parseUrlParams(n,e){let r,o,t,s=window.location.href;const a={};if(!(t=n?(o=e.indexOf("./")>=0?new URLSearchParams(new URL(e,s).search):new URLSearchParams(new URL(e).search)).toString():(r=window.location.search).substr(1)))return{};const c=t.split("&");for(const n of c){const[e,r]=n.split("=");a[e]=decodeURIComponent(r)}return a}

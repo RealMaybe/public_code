@@ -1,13 +1,13 @@
 /* canvas */
 function code() {
-    let canvas = document.getElementById("canvas");
-    let ctx = canvas.getContext("2d");
+    let canvas = document.getElementById("canvas"),
+        ctx = canvas.getContext("2d"),
+        chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz",
+        code = "",
+        codeLength = 6;
+
     canvas.width = 120;
     canvas.height = 40;
-
-    let chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-    let code = "";
-    let codeLength = 6;
 
     for (let i = 0; i < codeLength; i++) {
         let char = chars[Math.floor(Math.random() * chars.length)];
@@ -18,4 +18,5 @@ function code() {
     ctx.fillStyle = "#000000";
     ctx.fillText(code, 15, 30);
 };
+
 code();

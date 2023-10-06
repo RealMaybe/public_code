@@ -1,8 +1,8 @@
 /* 自动生成随机验证码 */
 function code(code_length) {
-    let code_tips = "";
-    let content = [];
-    let num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let code_tips = "",
+        content = [],
+        num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     /* 重复数字 */
     content = content.concat(num);
     /* 大写字母 */
