@@ -54,9 +54,9 @@ function autoTextarea(element, options) {
  * @example  
  * getFormatCode("测\r\n\s试")  =>  “测<br/> 试”
  */
-function getFormatCode(strValue) {
-    return strValue.replace(/\r\n/g, "<br/>").replace(/\n/g, "<br/>").replace(/\s/g, " ");
-};
+function getFormatCode(strValue) { return strValue.replace(/\r\n/g, "<br/>").replace(/\n/g, "<br/>").replace(/\s/g, " "); };
+
+function getFormatCode(strValue) { return `<div><p>${strValue.replace(/\r\n/g,"</p><p>").replace(/\n/g,"</p><p>")}</p></div>` };
 
 /* 调用实例 */
 $(".textarea").autoTextarea({ maxHeight: 220 });
