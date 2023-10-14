@@ -1,0 +1,137 @@
+#document {
+    font-family: Arial, sans-serif;
+    color: @black333;
+    line-height: 1.6;
+    margin: 2rem 1rem;
+
+    h1 {
+        font-size: 1.75rem;
+        font-weight: bold;
+        margin-bottom: 1.25rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1.25rem;
+    }
+
+    p {
+        line-height: 2rem;
+        margin-bottom: .625rem;
+
+        strong:before {
+            content: "• ";
+            font-weight: bold;
+        }
+
+        a {
+            color: @blue80;
+            text-decoration: underline;
+        }
+    }
+
+    ul {
+        margin-left: 1.25rem;
+        margin-bottom: .625rem;
+
+        li {
+            margin-bottom: .3125rem;
+        }
+    }
+
+    .footer {
+        margin-top: 2rem;
+        font-size: .875rem;
+        color: @black777;
+        text-align: center;
+    }
+
+    hr {
+        border: none;
+        border-top: .0625rem solid @white222;
+        margin: 1.25rem 0;
+    }
+}
+
+form {
+    .flex-between-center();
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+
+    .form-group {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .btn-box {
+        .flex-center();
+
+        button {
+            &:first-child {
+                margin-right: .75rem;
+            }
+
+            &:last-child {
+                margin-left: .75rem;
+            }
+        }
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: .5rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    textarea {
+        width: 100%;
+        padding: .5rem .625rem;
+        line-height: 1.25rem;
+        box-sizing: border-box;
+        border-radius: .3125rem;
+        border: .0625rem solid @white222;
+        outline: none;
+        resize: none;
+
+        &.ban {
+            background: @white239;
+        }
+    }
+
+    button {
+        width: 30%;
+        padding: .625rem 1.25rem;
+        background-color: @bluemoke;
+        color: @white255;
+        border: none;
+        border-radius: .3125rem;
+        cursor: pointer;
+
+        &:hover {
+            background-color: @blue80;
+        }
+
+        // 不可用
+        &.disabled {
+            // background: @black777;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    }
+
+    .userHead {
+        text-align: center;
+        margin-bottom: 1.25rem;
+
+        img {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+        }
+    }
+}

@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+// color
+@white255: rgba(255, 255, 255, 1);
+@white248: rgba(248, 248, 248, 1);
+@white239: rgba(239, 239, 239, 1);
+@white222: rgba(222, 222, 222, 1);
+@white200: rgba(200, 200, 200, 1);
+@white204: rgba(204, 204, 204, 1); // ccc
+@white-ccc: rgba(204, 204, 204, 1); // ccc
+@grey150: rgba(150, 150, 150, 1);
+@bluemoke: rgba(0, 128, 255, 1);
+@blue80: rgba(80, 80, 255, 1);
+@black: rgba(0, 0, 0, 1);
+@black777: #777;
+@black444: #444;
+@black333: #333;
+@blue-sky: #c2d4e8;
+@background: rgba(234, 237, 241, 1);
+
+/* font */
+html {
+    font-size: 16px !important;
+    color: @black;
+}
+
+@font-face {
+    font-family: puhuiti;
+    src: url(./Alibaba-PuHuiTi-Bold.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: STXingkai;
+    src: url(./STXingkai.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: simkai;
+    src: url(./simkai.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: kuhei;
+    src: url(./zhanku-kuhei.ttf) format("truetype");
+}
+
+// flex
+.flex-center() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-center-end() {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.flex-center-start() {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.flex-between-center() {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-start-center() {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.flex-start-end() {
+    display: flex;
+    justify-content: start;
+    align-items: flex-end;
+}
+
+.flex-end-center() {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* public */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    color: @black;
+    text-decoration: none;
+}

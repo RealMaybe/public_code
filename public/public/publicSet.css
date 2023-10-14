@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/* font */
+html {
+  font-size: 16px !important;
+  color: #000000;
+}
+@font-face {
+  font-family: puhuiti;
+  src: url(Alibaba-PuHuiTi-Bold.ttf) format("truetype");
+}
+@font-face {
+  font-family: STXingkai;
+  src: url(STXingkai.ttf) format("truetype");
+}
+@font-face {
+  font-family: simkai;
+  src: url(simkai.ttf) format("truetype");
+}
+@font-face {
+  font-family: kuhei;
+  src: url(zhanku-kuhei.ttf) format("truetype");
+}
+/* public */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul {
+  list-style: none;
+}
+a {
+  color: #000000;
+  text-decoration: none;
+}
