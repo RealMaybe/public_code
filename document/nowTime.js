@@ -1,6 +1,6 @@
 // 当前时间显示
 
-function showTime() {
+function nowTime() {
     let d = new Date(),
         year = d.getFullYear(),
         month = d.getMonth() + 1, // 0~11
@@ -13,19 +13,41 @@ function showTime() {
         min = doubleNum(d.getMinutes()),
         sec = doubleNum(d.getSeconds());
 
-    let str = year + "年" + month + "月" + date + "日 星期" + week + "&nbsp;" + hour + "&nbsp;:&nbsp;" + min + "&nbsp;:&nbsp;" + sec;
-
-    return str;
+    return {
+        year: year,
+        month: month,
+        date: date,
+        week: `星期${week}`,
+        hour: hour,
+        min: min,
+        sec: sec
+    }
 };
 
 //数字转成中文
-function numOfChinese(n) { let arr = ["日", "一", "二", "三", "四", "五", "六"]; return arr[n]; };
+function numOfChinese(n) { return ["日", "一", "二", "三", "四", "五", "六"][n] }
 
 // 不足两位，前面补0
 function doubleNum(n) { if (n < 10) { return "0" + n; } else { return n; } };
 
-// 调用
-setInterval(() => {
-    let oTime = document.getElementById("div1");
-    oTime.innerHTML = showTime()
-}, 1000);
+/* 代码压缩 */
+function nowTime() {
+    function numOfChinese(n) { return ["日", "一", "二", "三", "四", "五", "六"][n] };
+
+    function doubleNum(u) { return u < 10 ? "0" + u : u };
+
+    let e = new Date,
+        t = e.getFullYear(),
+        u = e.getMonth() + 1,
+        n = e.getDate(),
+        o = e.getDay();
+    return {
+        year: t,
+        month: u,
+        date: n,
+        week: `星期${o = numOfChinese(o)}`,
+        hour: doubleNum(e.getHours()),
+        min: doubleNum(e.getMinutes()),
+        sec: doubleNum(e.getSeconds())
+    }
+}
