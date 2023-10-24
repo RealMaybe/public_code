@@ -25,7 +25,25 @@ function StorageData(key, value, storageType) {
             return storedValue ? JSON.parse(storedValue) : null;
         }
     }
-}
+};
+
+/**
+ * 删除存储数据
+ * @param { string } key - 键名
+ * @param { string } storageType - 存储类型，可选值为"session"或其他。"session"表示使用会话级别的存储，其他值表示使用本地存储。
+ * @returns 无返回值
+ */
+function DeleteStorageData(key, storageType) {
+    if (window.plus && window.plus.storage) {
+        /* 在H5+app环境中使用plus.storage */
+        let storage = storageType === "session" ? plus.storage : plus.storage.getStorageSync();
+        storage.removeItem(key);
+    } else {
+        /* 在普通浏览器环境中使用localStorage和sessionStorage */
+        let storage = storageType === "session" ? sessionStorage : localStorage;
+        storage.removeItem(key);
+    }
+};
 
 /* 压缩 */
 function StorageData(e, t, s) {
@@ -39,3 +57,5 @@ function StorageData(e, t, s) {
         o.setItem(e, JSON.stringify(t))
     }
 }
+
+function DeleteStorageData(e, o) { window.plus && window.plus.storage ? ("session" === o ? plus.storage : plus.storage.getStorageSync()).removeItem(e) : ("session" === o ? sessionStorage : localStorage).removeItem(e) }
