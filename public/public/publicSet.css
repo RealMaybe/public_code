@@ -20,6 +20,18 @@ html {
   font-family: kuhei;
   src: url(zhanku-kuhei.ttf) format("truetype");
 }
+@font-face {
+  font-family: zhenhei;
+  src: url(GenShinGothic-Light.ttf) format("truetype");
+}
+@font-face {
+  font-family: yuanti;
+  src: url(ResourceHanRoundedHC-Bold.ttf) format("truetype");
+}
+@font-face {
+  font-family: yozai;
+  src: url(Yozai-Bold.ttf) format("truetype");
+}
 /* public */
 * {
   margin: 0;
