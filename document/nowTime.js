@@ -32,22 +32,11 @@ function doubleNum(n) { if (n < 10) { return "0" + n; } else { return n; } };
 
 /* 代码压缩 */
 function nowTime() {
-    function numOfChinese(n) { return ["日", "一", "二", "三", "四", "五", "六"][n] };
-
-    function doubleNum(u) { return u < 10 ? "0" + u : u };
-
-    let e = new Date,
-        t = e.getFullYear(),
-        u = e.getMonth() + 1,
-        n = e.getDate(),
-        o = e.getDay();
-    return {
-        year: t,
-        month: u,
-        date: n,
-        week: `星期${o = numOfChinese(o)}`,
-        hour: doubleNum(e.getHours()),
-        min: doubleNum(e.getMinutes()),
-        sec: doubleNum(e.getSeconds())
-    }
+    function e(e) { return e < 10 ? "0" + e : e }
+    let t = new Date,
+        n = t.getFullYear(),
+        o = t.getMonth() + 1,
+        r = t.getDate(),
+        u = t.getDay();
+    return { year: n, month: o, date: r, week: `星期${u=["日","一","二","三","四","五","六"][u]}`, hour: e(t.getHours()), min: e(t.getMinutes()), sec: e(t.getSeconds()) }
 }
