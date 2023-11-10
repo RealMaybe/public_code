@@ -48,7 +48,8 @@ function updateUrlParams(judge: boolean, params: { [key: string]: string }, url?
     const newSearch = searchParams.toString();
     let protocol: string, host: string, pathname: string, this_url: string = location.href;
     if (judge) {
-        if (url && url?.indexOf("./") >= 0) { ({ protocol, host, pathname } = new URL(url, this_url)) } /* 判断传入的url地址是路径形式还是url形式 */
+        /* 判断传入的url地址是路径形式还是url形式 */
+        if (url && url?.indexOf("./") >= 0) { ({ protocol, host, pathname } = new URL(url, this_url)) }
         else { ({ protocol, host, pathname } = new URL(url || location.href)); }
     } else {
         ({ protocol, host, pathname } = location);
@@ -71,7 +72,8 @@ function parseUrlParams(judge: boolean, url?: string): { [key: string]: string }
     let search: string, searchParams: URLSearchParams, queryString: string, this_url: string = location.href;
     const params: { [key: string]: string } = {};
     if (judge) {
-        if (url && url.indexOf("./") >= 0) { searchParams = new URLSearchParams(new URL(url, this_url).search) } /* 判断传入的url地址是路径形式还是url形式 */
+        /* 判断传入的url地址是路径形式还是url形式 */
+        if (url && url.indexOf("./") >= 0) { searchParams = new URLSearchParams(new URL(url, this_url).search) }
         else { searchParams = new URLSearchParams(new URL(url!).search); } queryString = searchParams.toString();
     } else { search = location.search; queryString = search.substr(1) }
     if (!queryString) { return {} }
