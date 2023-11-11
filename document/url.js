@@ -17,7 +17,7 @@ function updateUrlParams(judge, params, url) {
     for (const [key, value] of Object.entries(params)) { searchParams.append(key, value); }
 
     const newSearch = searchParams.toString();
-    let protocol, host, pathname, this_url = window.location.href;
+    let protocol, host, pathname, this_url = location.href;
 
     if (judge) {
         /* 判断传入的url地址是路径形式还是url形式 */
@@ -27,7 +27,7 @@ function updateUrlParams(judge, params, url) {
             ({ protocol, host, pathname } = new URL(url));
         }
     } else {
-        ({ protocol, host, pathname } = window.location);
+        ({ protocol, host, pathname } = location);
     }
 
     const newUrl = `${protocol}//${host}${pathname}?${newSearch}`;
@@ -35,7 +35,7 @@ function updateUrlParams(judge, params, url) {
     if (judge) {
         return newUrl;
     } else {
-        window.history.replaceState(null, '', newUrl);
+        history.replaceState(null, '', newUrl);
     }
 };
 
@@ -53,7 +53,7 @@ function updateUrlParams(judge, params, url) {
  * parseUrlParams(1, "http:127.0.0.1:550?uid=100000001&user=4")
  */
 function parseUrlParams(judge, url) {
-    let search, searchParams, queryString, this_url = window.location.href;
+    let search, searchParams, queryString, this_url = location.href;
     const params = {};
 
     if (judge) {
@@ -64,7 +64,7 @@ function parseUrlParams(judge, url) {
         }
         queryString = searchParams.toString();
     } else {
-        search = window.location.search;
+        search = location.search;
         queryString = search.substr(1);
     }
 
@@ -79,11 +79,15 @@ function parseUrlParams(judge, url) {
     return params;
 };
 
-/* 调用示例 */
-/* set */
+/* 
+ * 调用示例 
+
+// set
 updateUrlParams(0, { uid: 1001, user: 1 });
 console.log(updateUrlParams(1, { uid: 1001, user: 1 }, "http:127.0.0.1:550"));
 
-/* get */
+// get
 console.log(parseUrlParams(0));
 console.log(parseUrlParams(1, "http:127.0.0.1:550?uid=100000001&user=4"));
+
+*/
