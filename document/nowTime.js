@@ -21,7 +21,7 @@ function doubleNum(n) { if (n < 10) { return "0" + n; } else { return n; } };
 
 /* 代码压缩 */
 function nowTime() {
-    function e(e) { return e < 10 ? "0" + e : e }
+    function e(e) { return e < 10 ? "0" + e : e };
     let t = new Date,
         n = t.getFullYear(),
         o = t.getMonth() + 1,
