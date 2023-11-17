@@ -1,0 +1,3 @@
+使用方法: https://picsum.photos/宽度/高度
+
+例：https://picsum.photos/1920/1080
