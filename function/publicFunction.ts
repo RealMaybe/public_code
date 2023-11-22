@@ -21,7 +21,7 @@ function listGetRandomItem<T>(list: T[], remove: boolean = false): T {
 
 /**
  * 获取当前时间信息。
- * @returns { Object } 包含当前时间信息的对象。
+ * @returns { object } 包含当前时间信息的对象。
  * @property { number } year - 当前年份。
  * @property { number } month - 当前月份。
  * @property { number } date - 当前日期。
@@ -32,17 +32,16 @@ function listGetRandomItem<T>(list: T[], remove: boolean = false): T {
  */
 function nowTime(): object {
     function e(e: number) { return e < 10 ? "0" + e : e };
-
-    let d: Date = new Date(),
-        year: number = d.getFullYear(),
-        month: number = d.getMonth() + 1,
-        date: number = d.getDate(),
-        week: number | string = d.getDay(),
-        hour: number | string = e(d.getHours()),
-        min: number | string = e(d.getMinutes()),
-        sec: number | string = e(d.getSeconds());
-
-    return { year, month, date, week: `星期${["日", "一", "二", "三", "四", "五", "六"][week]}`, hour, min, sec }
+    const d: Date = new Date();
+    return {
+        year: d.getFullYear(),
+        month: d.getMonth() + 1,
+        date: d.getDate(),
+        week: `星期${["日", "一", "二", "三", "四", "五", "六"][d.getDay()]}`,
+        hour: e(d.getHours()),
+        min: e(d.getMinutes()),
+        sec: e(d.getSeconds())
+    }
 };
 
 /* ---------- */
