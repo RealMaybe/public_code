@@ -21,6 +21,8 @@ function listGetRandomItem<T>(list: T[], remove: boolean = false): T {
 
 /**
  * 获取当前时间信息。
+* @param { boolean } type - 是否返回星期数值，默认为false
+ * @param { string } lang - 返回星期值的语种（中：zh，英：en，日：jp），默认为zh
  * @returns { object } 包含当前时间信息的对象。
  * @property { number } year - 当前年份。
  * @property { number } month - 当前月份。
@@ -30,14 +32,30 @@ function listGetRandomItem<T>(list: T[], remove: boolean = false): T {
  * @property { number | string } min - 当前分钟。
  * @property { number | string } sec - 当前秒数。
  */
-function nowTime(): object {
+function nowTime(type: boolean = false, lang: string = "zh"): object {
     function e(e: number) { return e < 10 ? "0" + e : e };
-    const d: Date = new Date();
+    let d: Date = new Date(),
+        week: number | string = d.getDay();
+
+    /* 数值 */
+    if (type) {
+        week;
+    } else {
+        /* 语言 */
+        if (lang == "zh") {
+            week = `星期${["日", "一", "二", "三", "四", "五", "六"][d.getDay()]}`
+        } else if (lang == "en") {
+            week = `${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][d.getDay()]}`
+        } else if (lang = "jp") {
+            week = `${["日", "月", "火", "水", "木", "金", "土"][d.getDay()]}曜日`
+        }
+    }
+
     return {
         year: d.getFullYear(),
         month: d.getMonth() + 1,
         date: d.getDate(),
-        week: `星期${["日", "一", "二", "三", "四", "五", "六"][d.getDay()]}`,
+        week,
         hour: e(d.getHours()),
         min: e(d.getMinutes()),
         sec: e(d.getSeconds())
@@ -62,13 +80,13 @@ function updateUrlParams(judge: boolean, params: { [key: string]: string }, url?
     for (const [key, value] of Object.entries(params)) {
         searchParams.append(key, value)
     }
-    
+
     const newSearch = searchParams.toString();
     let protocol: string,
         host: string,
         pathname: string,
         this_url: string = location.href;
-    
+
     if (judge) {
         /* 判断传入的url地址是路径形式还是url形式 */
         if (url && url?.indexOf("./") >= 0) {
