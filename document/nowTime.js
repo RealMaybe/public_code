@@ -2,8 +2,7 @@
 
 /**
  * 获取当前时间信息。
- * @param { boolean } type - 是否返回星期数值
- * @param { string } lang - 返回星期值的中英文
+ * @param { string } lang - 返回星期值的语种（中：zh，英：en，日：jp），默认为zh。
  * @returns { object } 包含当前时间信息的对象。
  * @property { number } year - 当前年份。
  * @property { number } month - 当前月份。
@@ -13,24 +12,21 @@
  * @property { number | string } min - 当前分钟。
  * @property { number | string } sec - 当前秒数。
  */
-function nowTime(type = 0, lang = "zh") {
+function nowTime(lang = "zh") {
     function e(e) { return e < 10 ? "0" + e : e };
 
     let d = new Date(),
-        week = d.getDay();
-
-    /* 数值 */
-    if (type) {
         week;
+
+    /* 语言 */
+    if (lang === "zh") {
+        week = `星期${["日", "一", "二", "三", "四", "五", "六"][d.getDay()]}`
+    } else if (lang === "en") {
+        week = `${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][d.getDay()]}`
+    } else if (lang === "jp") {
+        week = `${["日", "月", "火", "水", "木", "金", "土"][d.getDay()]}曜日`
     } else {
-        /* 语言 */
-        if (lang == "zh") {
-            week = `星期${["日", "一", "二", "三", "四", "五", "六"][d.getDay()]}`
-        } else if (lang == "en") {
-            week = `${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][d.getDay()]}`
-        } else if (lang = "jp") {
-            week = `${["日", "月", "火", "水", "木", "金", "土"][d.getDay()]}曜日`
-        }
+        week = d.getDay()
     }
 
     return {
