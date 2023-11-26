@@ -17,7 +17,7 @@ function nowTime(type = 0, lang = "zh") {
     function e(e) { return e < 10 ? "0" + e : e };
 
     let d = new Date(),
-        week;
+        week = d.getDay();
 
     /* 数值 */
     if (type) {
