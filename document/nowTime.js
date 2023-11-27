@@ -7,7 +7,7 @@
  * @property { number } year - 当前年份。
  * @property { number } month - 当前月份。
  * @property { number } date - 当前日期。
- * @property { string } week - 当前星期（如：星期一）。
+ * @property { number | string } week - 当前星期（如：星期一）。
  * @property { number | string } hour - 当前小时。
  * @property { number | string } min - 当前分钟。
  * @property { number | string } sec - 当前秒数。

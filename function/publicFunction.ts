@@ -26,7 +26,7 @@ function listGetRandomItem<T>(list: T[], remove: boolean = false): T {
  * @property { number } year - 当前年份。
  * @property { number } month - 当前月份。
  * @property { number } date - 当前日期。
- * @property { string } week - 当前星期（如：星期一）。
+ * @property { number | string } week - 当前星期（如：星期一）。
  * @property { number | string } hour - 当前小时。
  * @property { number | string } min - 当前分钟。
  * @property { number | string } sec - 当前秒数。
@@ -147,12 +147,12 @@ function parseUrlParams(judge: boolean, url?: string): { [key: string]: string }
 
 /**
  * 自定义的 padStart 方法，用于在字符串的开头填充指定的字符，使字符串达到指定的长度。
- * @param { string | number } str - 需要填充的字符串。
+ * @param { string } str - 需要填充的字符串。
  * @param { number } targetLength - 填充后的目标长度。
  * @param { string } padString - 用于填充的字符。
  * @returns { string } - 填充后的字符串。
  */
-function customPadStart(str: string | number, targetLength: number, padString: string): string {
+function customPadStart(str: string, targetLength: number, padString: string): string {
     str = str.toString();
 
     // 将目标长度和当前字符串长度的差值计算出来
