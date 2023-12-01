@@ -51,5 +51,5 @@ function arrayDeduplication(array) {
     }
 
     // 返回去重后的新数组
-    return newArr;
+    return newArr.sort((a, b) => a - b);
 }
