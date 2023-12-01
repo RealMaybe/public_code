@@ -21,7 +21,7 @@ function listGetRandomItem<T>(list: T[], remove: boolean = false): T {
 
 /**
  * 获取当前时间信息。
- * @param { string } lang - 返回星期值的语种（中：zh，英：en，日：jp），默认为zh。
+ * @param { string } [lang = "zh"] - 返回星期值的语种（中：zh，英：en，日：jp），默认为zh。
  * @returns { object } 包含当前时间信息的对象。
  * @property { number } year - 当前年份。
  * @property { number } month - 当前月份。
@@ -33,30 +33,18 @@ function listGetRandomItem<T>(list: T[], remove: boolean = false): T {
  */
 function nowTime(lang: string = "zh"): object {
     function e(e: number) { return e < 10 ? "0" + e : e };
-    let d: Date = new Date(),
-        week: number | string;
-
-    /* 语言 */
-    if (lang === "zh") {
-        week = `星期${["日", "一", "二", "三", "四", "五", "六"][d.getDay()]}`
-    } else if (lang === "en") {
-        week = `${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][d.getDay()]}`
-    } else if (lang === "jp") {
-        week = `${["日", "月", "火", "水", "木", "金", "土"][d.getDay()]}曜日`
-    } else {
-        week = d.getDay()
-    }
+    let d: Date = new Date();
 
     return {
         year: d.getFullYear(),
         month: d.getMonth() + 1,
         date: d.getDate(),
-        week,
+        week: "zh" === lang ? `星期${["日", "一", "二", "三", "四", "五", "六"][d.getDay()]}` : "en" === lang ? `${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][d.getDay()]}` : "jp" === lang ? `${["日", "月", "火", "水", "木", "金", "土"][d.getDay()]}曜日` : d.getDay(),
         hour: e(d.getHours()),
         min: e(d.getMinutes()),
         sec: e(d.getSeconds())
     }
-};
+}
 
 /* ---------- */
 

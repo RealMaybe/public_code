@@ -14,26 +14,13 @@
  */
 function nowTime(lang = "zh") {
     function e(e) { return e < 10 ? "0" + e : e };
-
-    let d = new Date(),
-        week;
-
-    /* 语言 */
-    if (lang === "zh") {
-        week = `星期${["日", "一", "二", "三", "四", "五", "六"][d.getDay()]}`
-    } else if (lang === "en") {
-        week = `${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][d.getDay()]}`
-    } else if (lang === "jp") {
-        week = `${["日", "月", "火", "水", "木", "金", "土"][d.getDay()]}曜日`
-    } else {
-        week = d.getDay()
-    }
+    let d = new Date();
 
     return {
         year: d.getFullYear(),
         month: d.getMonth() + 1,
         date: d.getDate(),
-        week,
+        week: "zh" === lang ? `星期${["日", "一", "二", "三", "四", "五", "六"][d.getDay()]}` : "en" === lang ? `${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][d.getDay()]}` : "jp" === lang ? `${["日", "月", "火", "水", "木", "金", "土"][d.getDay()]}曜日` : d.getDay(),
         hour: e(d.getHours()),
         min: e(d.getMinutes()),
         sec: e(d.getSeconds())
