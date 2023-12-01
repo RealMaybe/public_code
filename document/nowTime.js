@@ -2,7 +2,7 @@
 
 /**
  * 获取当前时间信息。
- * @param { string } lang - 返回星期值的语种（中：zh，英：en，日：jp），默认为zh。
+ * @param { string } [lang = "zh"] - 返回星期值的语种（中：zh，英：en，日：jp），默认为zh。
  * @returns { object } 包含当前时间信息的对象。
  * @property { number } year - 当前年份。
  * @property { number } month - 当前月份。
