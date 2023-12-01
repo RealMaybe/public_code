@@ -8,7 +8,7 @@
  * @param { boolean } remove - 是否从列表中移除选择的元素
  * @returns { * } 随机选择的元素
  */
-function listGetRandomItem<T>(list: T[], remove: boolean = false): T {
+function listGetRandomItem(list, remove = false) {
     let x = Math.floor(Math.random() * list.length);
     if (remove) {
         return list.splice(x, 1)[0];
@@ -31,9 +31,9 @@ function listGetRandomItem<T>(list: T[], remove: boolean = false): T {
  * @property { number | string } min - 当前分钟。
  * @property { number | string } sec - 当前秒数。
  */
-function nowTime(lang: string = "zh"): object {
-    function e(e: number): number | string { return e < 10 ? "0" + e : e };
-    let d: Date = new Date();
+function nowTime(lang = "zh") {
+    function e(e) { return e < 10 ? "0" + e : e };
+    let d = new Date();
 
     return {
         year: d.getFullYear(),
@@ -58,22 +58,22 @@ function nowTime(lang: string = "zh"): object {
  * 
  * @exapmle updateUrlParams(0, { uid: 1001, user: 1 });
  * @exapmle updateUrlParams(1, { uid: 1001, user: 1 }, "http:127.0.0.1:550")
-*/
-function updateUrlParams(judge: boolean, params: { [key: string]: string }, url?: string): string | void {
-    const searchParams: URLSearchParams = new URLSearchParams();
+ */
+function updateUrlParams(judge, params, url) {
+    const searchParams = new URLSearchParams();
     for (const [key, value] of Object.entries(params)) {
         searchParams.append(key, value)
     }
 
     const newSearch = searchParams.toString();
-    let protocol: string,
-        host: string,
-        pathname: string,
-        this_url: string = location.href;
+    let protocol,
+        host,
+        pathname,
+        this_url = location.href;
 
     if (judge) {
         /* 判断传入的url地址是路径形式还是url形式 */
-        if (url && url?.indexOf("./") >= 0) {
+        if (url.indexOf("./") >= 0) {
             ({ protocol, host, pathname } = new URL(url, this_url))
         } else {
             ({ protocol, host, pathname } = new URL(url || location.href));
@@ -81,7 +81,7 @@ function updateUrlParams(judge: boolean, params: { [key: string]: string }, url?
     } else {
         ({ protocol, host, pathname } = location);
     }
-    const newUrl: string = `${protocol}//${host}${pathname}?${newSearch}`;
+    const newUrl = `${protocol}//${host}${pathname}?${newSearch}`;
 
     if (judge) {
         return newUrl
@@ -99,21 +99,21 @@ function updateUrlParams(judge: boolean, params: { [key: string]: string }, url?
  * 
  * @example parseUrlParams(0)
  * @exapmle parseUrlParams(1, "http:127.0.0.1:550?uid=100000001&user=4")
-*/
-function parseUrlParams(judge: boolean, url?: string): { [key: string]: string } {
-    let search: string,
-        searchParams: URLSearchParams,
-        queryString: string,
-        this_url: string = location.href;
+ */
+function parseUrlParams(judge, url) {
+    let search,
+        searchParams,
+        queryString,
+        this_url = location.href;
 
-    const params: { [key: string]: string } = {};
+    const params = {};
 
     if (judge) {
         /* 判断传入的url地址是路径形式还是url形式 */
         if (url && url.indexOf("./") >= 0) {
             searchParams = new URLSearchParams(new URL(url, this_url).search)
         } else {
-            searchParams = new URLSearchParams(new URL(url!).search);
+            searchParams = new URLSearchParams(new URL(url).search);
         }
         queryString = searchParams.toString();
     } else {
@@ -122,10 +122,11 @@ function parseUrlParams(judge: boolean, url?: string): { [key: string]: string }
     }
     if (!queryString) { return {} }
 
-    const paramList: string[] = queryString.split("&");
+    const paramList = queryString.split("&");
 
     for (const param of paramList) {
-        const [key, value] = param.split("="); params[key] = decodeURIComponent(value)
+        const [key, value] = param.split("=");
+        params[key] = decodeURIComponent(value)
     }
 
     return params;
@@ -140,17 +141,17 @@ function parseUrlParams(judge: boolean, url?: string): { [key: string]: string }
  * @param { string } padString - 用于填充的字符。
  * @returns { string } - 填充后的字符串。
  */
-function customPadStart(str: string, targetLength: number, padString: string): string {
+function customPadStart(str, targetLength, padString) {
     str = str.toString();
 
     // 将目标长度和当前字符串长度的差值计算出来
-    const paddingLength: number = targetLength - str.length;
+    const paddingLength = targetLength - str.length;
 
     // 如果需要填充的长度小于等于 0，或者没有指定填充字符，则直接返回原始字符串
     if (paddingLength <= 0 || padString.length === 0) { return str }
 
     // 将填充字符重复拼接到目标长度，然后通过 slice 方法截取需要的部分
-    const paddedString: string = padString.repeat(Math.ceil(paddingLength / padString.length)).slice(0, paddingLength);
+    const paddedString = padString.repeat(Math.ceil(paddingLength / padString.length)).slice(0, paddingLength);
 
     // 返回填充后的字符串
     return paddedString + str;
@@ -160,18 +161,18 @@ function customPadStart(str: string, targetLength: number, padString: string): s
 
 /**
  * 数组去重
- * @param { T[] } array - 需要去重的数组
- * @returns { T[] } - 去重后的新数组
+ * @param { array } array - 需要去重的数组
+ * @returns { array } - 去重后的新数组
  */
-function arrayDeduplication<T>(array: T[]): T[] {
+function arrayDeduplication(array) {
     // 复制数组
-    const newArr: T[] = [...array];
+    const newArr = [...array];
 
     // 检查是否为对象
-    const isObject = (val: any): boolean => typeof val === "object" && val !== null;
+    const isObject = (val) => typeof val === "object" && val !== null;
 
     // 判断两个值是否相等
-    function equals(val_1: any, val_2: any): boolean {
+    function equals(val_1, val_2) {
         // 如果两个值中有一个不是对象，直接使用 Object.is 方法比较
         if (!isObject(val_1) || !isObject(val_2)) return Object.is(val_1, val_2);
 
@@ -211,8 +212,8 @@ function arrayDeduplication<T>(array: T[]): T[] {
     }
 
     // 返回去重后的新数组
-    return newArr.sort((a: any, b: any) => a - b);
-}
+    return newArr.sort((a, b) => a - b);
+};
 
 /* 导出相关函数 */
 export {
