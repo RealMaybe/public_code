@@ -45,17 +45,25 @@ function DeleteStorageData(key, storageType) {
     }
 };
 
-/* 压缩 */
-function StorageData(e, s, t) {
-    if (window.plus && window.plus.storage) {
-        let o = "session" === t ? plus.storage : plus.storage.getStorageSync();
-        if (null == s) return o.getItem(e);
-        o.setItem(e, s)
-    } else {
-        let o = "session" === t ? sessionStorage : localStorage;
-        if (null == s) { let s = o.getItem(e); return s ? JSON.parse(s) : null }
-        o.setItem(e, JSON.stringify(s))
-    }
-}
+/** */
+const StorageAPI = (function(storageType) {
+    let storage;
 
-function DeleteStorageData(e, s) { window.plus && window.plus.storage ? ("session" === s ? plus.storage : plus.storage.getStorageSync()).removeItem(e) : ("session" === s ? sessionStorage : localStorage).removeItem(e) }
+    // H5+app 环境
+    if (window.plus && window.plus.storage) storage = storageType === "session" ? plus.storage : plus.storage.getStorageSync();
+
+    // 浏览器环境
+    storage = storageType === "session" ? sessionStorage : localStorage;
+
+    return {
+        StorageData: (key, value) => {
+            if (value != undefined) {
+                storage.setItem(key, JSON.stringify(value));
+            } else {
+                let storedValue = storage.getItem(key);
+                return storedValue ? JSON.parse(storedValue) : null;
+            }
+        },
+        DeleteStorageData: key => storage.removeItem(key)
+    }
+})();
