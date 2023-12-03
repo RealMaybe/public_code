@@ -37,8 +37,8 @@ function nowTime(lang = "zh") {
 
     return {
         year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        date: d.getDate(),
+        month: e(d.getMonth() + 1),
+        date: e(d.getDate()),
         week: "zh" === lang ? `星期${["日", "一", "二", "三", "四", "五", "六"][d.getDay()]}` : "en" === lang ? `${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][d.getDay()]}` : "jp" === lang ? `${["日", "月", "火", "水", "木", "金", "土"][d.getDay()]}曜日` : d.getDay(),
         hour: e(d.getHours()),
         min: e(d.getMinutes()),

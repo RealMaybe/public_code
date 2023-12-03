@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本框自适应高度及提交效果测试</title>
+    <!-- style -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .container {
+            min-width: 768px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1,
+        h2 {
+            margin: 20px 0;
+        }
+        
+        form {
+            display: flex;
+            justify-content: start;
+            align-items: flex-end;
+            flex-direction: column;
+        }
+        
+        form .info {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        form .info p {
+            display: flex;
+            line-height: 40px;
+        }
+        
+        form .info p label {
+            width: 100px;
+            height: 40px;
+        }
+        
+        form .info p input {
+            width: 200px;
+            height: 40px;
+            padding: 10px;
+        }
+        
+        form .info button {
+            width: 100px;
+            height: 40px;
+        }
+        
+        form .word {
+            position: relative;
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        form .word textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            line-height: 20px;
+            resize: none;
+        }
+        
+        form .word .length {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            line-height: 20px;
+            color: #dedede;
+        }
+        /* line */
+        
+        p.line {
+            width: 120px;
+            height: 0;
+            margin: 30px auto;
+            border-bottom: 2px solid #0080FF;
+        }
+        /* show */
+        
+        .show {
+            width: 1200px;
+            line-height: 30px;
+            margin: 0 auto 30px;
+            padding: 30px 40px;
+            border-radius: 30px;
+            background: #efefef;
+        }
+        
+        .show>* {
+            width: 1100px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: start;
+            align-items: flex-start;
+        }
+        
+        .show .info {
+            align-items: center;
+        }
+        
+        .show .tip {
+            width: 100px;
+            font-weight: 700;
+            line-height: 50px;
+        }
+        
+        .show .word {
+            margin-bottom: 0;
+        }
+        
+        .show .info p,
+        .show .word>div {
+            width: 1000px;
+            padding: 10px 20px;
+            border-radius: 15px;
+            background: #dfdfdf;
+        }
+        
+        .show .word>div p {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .show .word>div p:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+        <h1>文本框自适应高度及提交效果测试</h1>
+
+        <h2>联系我们</h2>
+
+        <form id="form">
+            <div class="word">
+                <textarea id="word" placeholder="留言" maxlength="3000"></textarea>
+                <p class="length">0 / 3000</p>
+            </div>
+            <div class="info">
+                <p>
+                    <label for="name">您的姓名：</label>
+                    <input type="text" id="name" placeholder="姓名" maxlength="10">
+                </p>
+                <p>
+                    <label for="tel">您的电话：</label>
+                    <input type="tel" id="tel" placeholder="电话" maxlength="10">
+                </p>
+                <p>
+                    <label for="email">您的邮箱：</label>
+                    <input type="email" id="email" placeholder="邮箱" maxlength="100">
+                </p>
+                <button type="submit">提交</button>
+            </div>
+        </form>
+    </main>
+
+    <p class="line"></p>
+
+    <section class="after"></section>
+
+    <!-- jquery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        /* var */
+        let template = {
+            time: null,
+            name: null,
+            tel: null,
+            email: null,
+            word: null
+        };
+
+        const telReg = /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1589]))\d{8}$/,
+            emailReg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+
+        /* method */
+
+        // textarea文本框自适应高度
+        (function($) {
+            $.fn.autoTextarea = function(options) {
+                let defaults = {
+                    maxHeight: null, //文本框是否自动撑高，默认：null，不自动撑高；如果自动撑高必须输入数值，该值作为文本框自动撑高的最大高度
+                    minHeight: $(this).height() //默认最小高度，也就是文本框最初的高度，当内容高度小于这个高度的时候，文本以这个高度显示
+                };
+                let opts = $.extend({}, defaults, options);
+                return $(this).each(function() {
+                    $(this).bind("paste cut keydown keyup focus blur", function() {
+                        let height, style = this.style;
+                        this.style.height = opts.minHeight + "px";
+                        if (this.scrollHeight > opts.minHeight) {
+                            if (opts.maxHeight && this.scrollHeight > opts.maxHeight) {
+                                height = opts.maxHeight;
+                                style.overflowY = "scroll";
+                            } else {
+                                height = this.scrollHeight;
+                                style.overflowY = "hidden";
+                            }
+                            style.height = height + "px";
+                        }
+                    });
+                });
+            };
+        })(jQuery);
+
+        // textarea 字符串格式化
+        function getFormatCode(strValue) {
+            return `<div><p>${strValue.replace(/\r\n/g,"</p><p>").replace(/\n/g,"</p><p>")}</p></div>`
+        };
+
+        // 获取当前时间
+        function nowTime(lang = "zh") {
+            function e(e) {
+                return e < 10 ? "0" + e : e
+            };
+            let d = new Date();
+
+            return {
+                year: d.getFullYear(),
+                month: d.getMonth() + 1,
+                date: e(d.getDate()),
+                week: "zh" === lang ? `星期${["日", "一", "二", "三", "四", "五", "六"][d.getDay()]}` : "en" === lang ? `${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][d.getDay()]}` : "jp" === lang ? `${["日", "月", "火", "水", "木", "金", "土"][d.getDay()]}曜日` : d.getDay(),
+                hour: e(d.getHours()),
+                min: e(d.getMinutes()),
+                sec: e(d.getSeconds())
+            }
+        };
+
+        // 电话号格式化
+        function formatPhoneNumber(phoneNumber) {
+            const cleaned = phoneNumber.replace(/\D/g, ""); // 去除字符串中的所有非数字字符
+            const match = cleaned.match(/^(\d{3})(\d{4})(\d{4})$/); // 检查是否满足手机号的长度要求
+            if (match) return match[1] + "-" + match[2] + "-" + match[3]; // 使用横杠分隔手机号的三个部分
+            return phoneNumber; // 如果不满足格式要求，则返回原始输入值
+        }
+
+        /* page */
+        $(document).ready(function() {
+            // 默认提示内容
+            $("#name").val("YourName");
+            $("#tel").val("13845678901");
+            $("#email").val("123456789@163.com");
+            $("#word").val(`    请注意
+    本页面仅仅作为演示
+    如有相关需求，如：
+        1. 配置到自己的项目中
+        2. 修改源代码
+    等，不需要联系我授权，自行使用即可。`);
+
+            // textarea
+            (() => {
+                const maxLength = 3000; // 定义限制长度
+                const inputLength = $(".word textarea").val().length; // 获取输入框内容长度
+                $(".word .length").text(`${inputLength} / ${maxLength}`); // 写入提示区
+
+                // 输入监听
+                $(".word textarea").on("input", function() {
+                    const inputLength = $(this).val().length; // 获取输入框内容长度
+                    if (inputLength > maxLength) $(this).val($(this).val().slice(0, maxLength)); // 截断超出的部分
+                    $(".word .length").text(`${inputLength} / ${maxLength}`) // 写入提示区
+                }).autoTextarea({
+                    maxHeight: 300,
+                    minHeight: 150
+                }).attr("maxlength", maxLength);
+            })();
+
+            // form
+            $("#form").submit(e => {
+                e.preventDefault(); // 阻止默认事件
+
+                // 非空验证
+                if ($("#name").val() == "" ||
+                    $("#tel").val() == "" ||
+                    $("#email").val() == "" ||
+                    $("#word").val() == "") {
+                    alert("存在空数据！请认真填写！");
+                    return
+                }
+
+                // 正则验证
+                if (!telReg.test($("#tel").val())) {
+                    alert("电话号不合法！请重新输入");
+                    return
+                }
+                if (!emailReg.test($("#email").val())) {
+                    alert("邮箱不合法！请重新输入");
+                    return
+                }
+
+                const {
+                    year,
+                    month,
+                    date,
+                    hour,
+                    min,
+                    sec
+                } = nowTime();
+
+                template.time = `${year}/${month}/${date} ${hour}:${min}:${sec}`;
+                template.name = $("#name").val();
+                template.tel = formatPhoneNumber($("#tel").val());
+                template.email = $("#email").val();
+                template.word = getFormatCode($("#word").val());
+
+                console.log(template);
+
+                after()
+
+                $(this).find("input, textarea").val(""); // 清除表单数据
+            });
+
+            // 提交后
+            function after() {
+                const newEle = `
+                <section class="show">
+                    <div class="info">
+                        <span class="tip">留言时间：</span>
+                        <p>${template.time}</p>
+                    </div>
+                    <div class="info">
+                        <span class="tip">姓名：</span>
+                        <p>${template.name}</p>
+                    </div>
+                    <div class="info">
+                        <span class="tip">电话：</span>
+                        <p>${template.tel}</p>
+                    </div>
+                    <div class="info">
+                        <span class="tip">邮箱：</span>
+                        <p>${template.email}</p>
+                    </div>
+                    <article class="word">
+                        <span class="tip">留言内容：</span>
+                        ${template.word}
+                    </article>
+                </section>`;
+
+                $("section.after").prepend(newEle);
+            }
+        });
+    </script>
+
+</body>
+
+</html>
