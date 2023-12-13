@@ -28,8 +28,4 @@ $(".returnTop").click(function() {
     }, 10);
 });
 
-$(".totop").click(function() {
-    $("html").animate({
-        scrollTop: 0
-    }, 500);
-});
+$(".totop").click(function() { $("html").animate({ scrollTop: 0 }, 500) });

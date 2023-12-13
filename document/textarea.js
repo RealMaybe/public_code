@@ -25,21 +25,40 @@
     };
 })(jQuery);
 
-/* 原生js函数 */
-function autoTextarea(element, options) {
-    let defaults = {
-        maxHeight: null,
-        minHeight: element.clientHeight
-    };
-    let opts = Object.assign({}, defaults, options);
+/**
+ * 自适应高度的 textarea 输入框
+ * @param { object | number } options 配置项，可以是一个数字（表示最大高度），或者一个包含最大高度和最小高度的对象
+ * @param { HTMLTextAreaElement } element 需要自适应高度的 textarea 元素
+ */
+function autoTextarea(options, element) {
+    // 默认配置项
+    let parameter,
+        defaults = {
+            maxHeight: null,
+            minHeight: element.clientHeight
+        };
 
+    // 检测传入数据类型
+    if (typeof options === "number") parameter = { maxHeight: options }
+    else if (typeof options === "object") parameter = options
+    else { console.error("The parameter of this function ( autoTextarea ) must be number or object"); return }
+
+    let opts = Object.assign({}, defaults, parameter); // 合并配置项
+
+    // 监听 textarea 的输入事件
     element.addEventListener("input", function() {
+        // 设置 textarea 的最小高度
         element.style.height = opts.minHeight + "px";
+        // 如果内容高度大于最小高度
         if (element.scrollHeight > opts.minHeight) {
+            // 如果设置了最大高度，并且内容高度大于最大高度
             if (opts.maxHeight && element.scrollHeight > opts.maxHeight) {
+                // 设置 overflowY 为滚动条，高度为最大高度
                 element.style.overflowY = "scroll";
                 element.style.height = opts.maxHeight + "px";
             } else {
+                // 没有设置最大高度或者内容高度小于等于最大高度
+                // 设置 overflowY 为隐藏，高度为内容高度
                 element.style.overflowY = "hidden";
                 element.style.height = element.scrollHeight + "px";
             }

@@ -1,16 +1,18 @@
 /**
  * 数组去重
- * @param { Array } array - 需要去重的数组
- * @return { Array } - 去重后的新数组
+ * @param { Array } array 需要去重的数组
+ * @return { Array } 去重后的新数组
  */
 function arrayDeduplication(array) {
-    // 复制数组
-    const newArr = [...array];
+    const newArr = [...array]; // 复制数组
+    const isObject = val => typeof val === "object" && val !== null; // 检查是否为对象
 
-    // 检查是否为对象
-    const isObject = val => typeof val === "object" && val !== null;
-
-    // 判断两个值是否相等
+    /**
+     * 判断两个值是否相等
+     * @param { any } val_1 任意值
+     * @param { any } val_2 任意值
+     * @returns { boolean } 返回是否一致的判定结果
+     */
     function equals(val_1, val_2) {
         // 如果两个值中有一个不是对象，直接使用 Object.is 方法比较
         if (!isObject(val_1) || !isObject(val_2)) return Object.is(val_1, val_2);
@@ -50,6 +52,5 @@ function arrayDeduplication(array) {
         }
     }
 
-    // 返回去重后的新数组
-    return newArr.sort((a, b) => a - b);
+    return newArr.sort((a, b) => a - b); // 返回去重后的新数组
 }
