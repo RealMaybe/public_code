@@ -27,13 +27,7 @@ function time() {
 };
 
 // 数字如果小于零则一直显示0
-function numZero(num) {
-    if (num > 0) {
-        return num = num;
-    } else if (num <= 0) {
-        return num = 0;
-    }
-};
+function numZero(n) { return n > 0 ? n : n <= 0 ? 0 : void 0 }
 
 $(".day").html(time());
 let birthDay_time = setInterval(() => {

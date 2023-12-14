@@ -10,11 +10,8 @@ function StorageData(key, value, storageType) {
     if (window.plus && window.plus.storage) {
         /* 在H5+app环境中使用plus.storage */
         let storage = storageType === "session" ? plus.storage : plus.storage.getStorageSync();
-        if (value != undefined) {
-            storage.setItem(key, value);
-        } else {
-            return storage.getItem(key);
-        }
+        if (value != undefined) storage.setItem(key, value);
+        else return storage.getItem(key);
     } else {
         /* 在普通浏览器环境中使用localStorage和sessionStorage */
         let storage = storageType === "session" ? sessionStorage : localStorage;
