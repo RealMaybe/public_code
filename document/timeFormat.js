@@ -13,11 +13,13 @@ function formate(date, formatter, isPad = false) {
      */
     function _formatNormalize(formatter) {
         // 基本判断
-        if (typeof formatter === "function") { return formatter }
-        if (typeof formatter !== "string") { throw new TypeError("formatter must be a string") }
+        if (typeof formatter === "function") return formatter
+        if (typeof formatter !== "string") throw new TypeError("formatter must be a string")
 
         // 格式判断
-        if (formatter === "date") { formatter = "yyyy-MM-dd" } else if (formatter === "datetime") { formatter = "yyyy-MM-dd hh:mm:ss" } else if (formatter === "time") { formatter = "hh:mm:ss" }
+        if (formatter === "date") formatter = "yyyy-MM-dd"
+        else if (formatter === "datetime") formatter = "yyyy-MM-dd hh:mm:ss"
+        else if (formatter === "time") formatter = "hh:mm:ss"
 
         /**
          * 自定义格式化函数
@@ -48,15 +50,7 @@ function formate(date, formatter, isPad = false) {
 
     formatter = _formatNormalize(formatter);
 
-    const dateInfo = {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        date: date.getDate(),
-        week: date.getDay(),
-        hour: date.getHours(),
-        minute: date.getMinutes(),
-        second: date.getSeconds(),
-    }
+    const dateInfo = { year: date.getFullYear(), month: date.getMonth() + 1, date: date.getDate(), week: date.getDay(), hour: date.getHours(), minute: date.getMinutes(), second: date.getSeconds(), }
 
     dateInfo.yyyy = dateInfo.year.toString();
     dateInfo.MM = dateInfo.month.toString();
@@ -65,7 +59,7 @@ function formate(date, formatter, isPad = false) {
     dateInfo.mm = dateInfo.minute.toString();
     dateInfo.ss = dateInfo.second.toString();
 
-    if (isPad) { dateInfo.yyyy = customPadStart(dateInfo.yyyy, 4), dateInfo.MM = customPadStart(dateInfo.MM, 2), dateInfo.dd = customPadStart(dateInfo.dd, 2), dateInfo.hh = customPadStart(dateInfo.hh, 2), dateInfo.mm = customPadStart(dateInfo.mm, 2), dateInfo.ss = customPadStart(dateInfo.ss, 2) }
+    if (isPad) dateInfo.yyyy = customPadStart(dateInfo.yyyy, 4), dateInfo.MM = customPadStart(dateInfo.MM, 2), dateInfo.dd = customPadStart(dateInfo.dd, 2), dateInfo.hh = customPadStart(dateInfo.hh, 2), dateInfo.mm = customPadStart(dateInfo.mm, 2), dateInfo.ss = customPadStart(dateInfo.ss, 2)
 
     const result = formatter(dateInfo);
 

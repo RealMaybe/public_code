@@ -21,22 +21,14 @@ function updateUrlParams(judge, params, url) {
 
     if (judge) {
         /* 判断传入的url地址是路径形式还是url形式 */
-        if (url.indexOf("./") >= 0) {
-            ({ protocol, host, pathname } = new URL(url, this_url));
-        } else {
-            ({ protocol, host, pathname } = new URL(url));
-        }
-    } else {
-        ({ protocol, host, pathname } = location);
-    }
+        if (url.indexOf("./") >= 0)({ protocol, host, pathname } = new URL(url, this_url));
+        else({ protocol, host, pathname } = new URL(url));
+    } else({ protocol, host, pathname } = location);
 
     const newUrl = `${protocol}//${host}${pathname}?${newSearch}`;
 
-    if (judge) {
-        return newUrl;
-    } else {
-        history.replaceState(null, '', newUrl);
-    }
+    if (judge) return newUrl;
+    else history.replaceState(null, '', newUrl);
 };
 
 
@@ -57,11 +49,9 @@ function parseUrlParams(judge, url) {
     const params = {};
 
     if (judge) {
-        if (url.indexOf("./") >= 0) {
-            searchParams = new URLSearchParams(new URL(url, this_url).search);
-        } else {
-            searchParams = new URLSearchParams(new URL(url).search);
-        }
+        if (url.indexOf("./") >= 0) searchParams = new URLSearchParams(new URL(url, this_url).search);
+        else searchParams = new URLSearchParams(new URL(url).search);
+
         queryString = searchParams.toString();
     } else {
         search = location.search;

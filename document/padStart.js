@@ -13,7 +13,7 @@ function customPadStart(str, targetLength, padString = "0") {
     const paddingLength = targetLength - str.length;
 
     // 如果需要填充的长度小于等于 0，或者没有指定填充字符，则直接返回原始字符串
-    if (paddingLength <= 0 || padString.length === 0) { return str }
+    if (paddingLength <= 0 || padString.length === 0) return str
 
     // 将填充字符重复拼接到目标长度，然后通过 slice 方法截取需要的部分
     const paddedString = padString.repeat(Math.ceil(paddingLength / padString.length)).slice(0, paddingLength);
@@ -21,3 +21,6 @@ function customPadStart(str, targetLength, padString = "0") {
     // 返回填充后的字符串
     return paddedString + str;
 };
+
+// 位数不够往前补0 （其实相当于一个自定义的padStart）
+const replenishZero = (num, len, zero = 0) => num.toString().padStart(len, zero);
