@@ -3,7 +3,7 @@
  * @param { string[] } urls 待请求的 url 数组
  * @param { number } maxNum 最大并发数
  */
-function consurRequest(urls, maxNum) {
+function concurrencyRequest(urls, maxNum) {
     return new Promise(resolve => {
         if (urls.length === 0) { resolve([]) }
         let index = 0, // 下一次请求对应的url地址下标
