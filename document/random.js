@@ -5,11 +5,11 @@
  * @param { number } max
  * @returns number
  */
-function getRandom(min, max) { return Math.floor(Math.random() * (max - min + 1) + min); };
+const getRandom = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 /** 
  * 数字如果小于零则一直显示0
  * @param { number } n
  * @returns { number }
  */
-function numZero(n) { return n > 0 ? n : n <= 0 ? 0 : void 0 }
+const numZero = n => n > 0 ? n : n <= 0 ? 0 : void 0
