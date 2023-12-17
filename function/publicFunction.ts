@@ -65,7 +65,8 @@ function updateUrlParams(judge: boolean, params: { [key: string]: string }, url?
         searchParams.append(key, value)
     }
 
-    const newSearch = searchParams.toString();
+    const newSearch: string = searchParams.toString();
+
     let protocol: string,
         host: string,
         pathname: string,
@@ -73,21 +74,12 @@ function updateUrlParams(judge: boolean, params: { [key: string]: string }, url?
 
     if (judge) {
         /* 判断传入的url地址是路径形式还是url形式 */
-        if (url && url?.indexOf("./") >= 0) {
-            ({ protocol, host, pathname } = new URL(url, this_url))
-        } else {
-            ({ protocol, host, pathname } = new URL(url || location.href));
-        }
-    } else {
-        ({ protocol, host, pathname } = location);
-    }
+        url && url?.indexOf("./") >= 0 ? ({ protocol, host, pathname } = new URL(url, this_url)) : ({ protocol, host, pathname } = new URL(url || location.href))
+    } else ({ protocol, host, pathname } = location);
+
     const newUrl: string = `${protocol}//${host}${pathname}?${newSearch}`;
 
-    if (judge) {
-        return newUrl
-    } else {
-        history.replaceState(null, "", newUrl)
-    }
+    return judge ? newUrl : history.replaceState(null, "", newUrl)
 };
 
 /**
@@ -110,17 +102,15 @@ function parseUrlParams(judge: boolean, url?: string): { [key: string]: string }
 
     if (judge) {
         /* 判断传入的url地址是路径形式还是url形式 */
-        if (url && url.indexOf("./") >= 0) {
-            searchParams = new URLSearchParams(new URL(url, this_url).search)
-        } else {
-            searchParams = new URLSearchParams(new URL(url!).search);
-        }
+        if (url && url.indexOf("./") >= 0) searchParams = new URLSearchParams(new URL(url, this_url).search);
+        else searchParams = new URLSearchParams(new URL(url!).search);
+
         queryString = searchParams.toString();
     } else {
         search = location.search;
         queryString = search.substr(1)
     }
-    if (!queryString) { return {} }
+    if (!queryString) return {}
 
     const paramList: string[] = queryString.split("&");
 
@@ -212,7 +202,63 @@ function arrayDeduplication<T>(array: T[]): T[] {
 
     // 返回去重后的新数组
     return newArr.sort((a: any, b: any) => a - b);
-}
+};
+
+/**
+ * 自适应高度的 textarea 输入框
+ * @param { number | { "maxHeight": number, "minHeight": number} } options 配置项，可以是一个数字（表示最大高度），或者一个包含最大高度和最小高度的对象
+ * @param { number } options.maxHeight - 文本域的最大高度限制
+ * @param { number } options.minHeight - 文本域的最小高度限制
+ * @param { HTMLTextAreaElement } element 需要自适应高度的 textarea 元素
+ */
+function autoTextarea(options: number | {
+    maxHeight: number,
+    minHeight: number
+}, element: HTMLTextAreaElement): void {
+    // 默认配置项
+    let parameter: number | object;
+    const defaults: object = {
+        maxHeight: null,
+        minHeight: element.clientHeight
+    };
+
+    // 数据类型检测 参数归一化
+    if (typeof options === "number") parameter = { maxHeight: options };
+    else if (typeof options === "object") parameter = options;
+    else { console.error("Error: The parameter of this function (autoTextarea) must be number or object"); return }
+
+    const opts: {
+        maxHeight: number | null,
+        minHeight: number
+    } = {
+        ...defaults,
+        ...parameter,
+        maxHeight: 0,
+        minHeight: 0
+    }; // 合并配置项
+
+    // 监听 textarea 的输入事件
+    element.addEventListener("input", function () {
+        // 设置 textarea 的最小高度
+        element.style.height = opts.minHeight + "px";
+        // 如果内容高度大于最小高度
+        if (element.scrollHeight > opts.minHeight) {
+            // 如果设置了最大高度，并且内容高度大于最大高度
+            if (opts.maxHeight && element.scrollHeight > opts.maxHeight) {
+                // 设置 overflowY 为滚动条，高度为最大高度
+                element.style.overflowY = "scroll";
+                element.style.height = opts.maxHeight + "px";
+            } else {
+                // 没有设置最大高度或者内容高度小于等于最大高度
+                // 设置 overflowY 为隐藏，高度为内容高度
+                element.style.overflowY = "hidden";
+                element.style.height = element.scrollHeight + "px";
+            }
+        }
+    })
+};
+
+/* ---------- */
 
 /* 导出相关函数 */
 export {
@@ -222,4 +268,5 @@ export {
     parseUrlParams, // 获取URL地址中的参数
     customPadStart, // padStart 在字符串的开头填充指定的字符, 使字符串达到指定的长度
     arrayDeduplication, // 数组去重
+    autoTextarea, //  textarea 输入框自适应高度
 }

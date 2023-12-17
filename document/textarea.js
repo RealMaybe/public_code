@@ -27,21 +27,20 @@
 
 /**
  * 自适应高度的 textarea 输入框
- * @param { object | number } options 配置项，可以是一个数字（表示最大高度），或者一个包含最大高度和最小高度的对象
+ * @param { number | { "maxHeight": number, "minHeight": number} } options 配置项，可以是一个数字（表示最大高度），或者一个包含最大高度和最小高度的对象
+ * @param { number } options.maxHeight - 文本域的最大高度限制
+ * @param { number } options.minHeight - 文本域的最小高度限制
  * @param { HTMLTextAreaElement } element 需要自适应高度的 textarea 元素
  */
 function autoTextarea(options, element) {
     // 默认配置项
     let parameter,
-        defaults = {
-            maxHeight: null,
-            minHeight: element.clientHeight
-        };
+        defaults = { maxHeight: null, minHeight: element.clientHeight };
 
     // 检测传入数据类型
     if (typeof options === "number") parameter = { maxHeight: options }
     else if (typeof options === "object") parameter = options
-    else { console.error("The parameter of this function ( autoTextarea ) must be number or object"); return }
+    else { console.error("Error: The parameter of this function (autoTextarea) must be number or object"); return }
 
     let opts = Object.assign({}, defaults, parameter); // 合并配置项
 
