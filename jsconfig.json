@@ -6,7 +6,7 @@
     },
     "include": [
         "**/*"
-    ],
+, "public/js/vue-v2.7.0.min.js", "public/js/jquery-3.6.0.min.js"    ],
     "exclude": [
         "node_modules",
         "bower_components",
