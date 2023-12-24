@@ -2,11 +2,11 @@
  * 根据指定格式格式化日期
  * @param { Date } date 日期对象
  * @param { string | function } formatter 格式化字符串或自定义格式化函数
- * @param { boolean } isPad 是否对日期的各个部分进行补零处理，默认为false
+ * @param { boolean } [isPad = false]  是否对日期的各个部分进行补零处理，默认为false
  * @returns { string } 格式化后的日期字符串
  */
 function formate(date, formatter, isPad = false) {
-    // 内部公共函数部分
+    /* 内部公共函数部分 */
 
     /**
      * 将格式化字符串规范为格式化函数
@@ -14,14 +14,14 @@ function formate(date, formatter, isPad = false) {
      * @returns { function } 格式化函数
      */
     function _formatNormalize(formatter) {
-        // 基本判断
-        if (typeof formatter === "function") return formatter
-        if (typeof formatter !== "string") throw new TypeError("formatter must be a string")
+        /* 基本判断 */
+        if (typeof formatter === "function") return formatter; // 如果是函数直接返回
+        if (typeof formatter !== "string") throw new TypeError("Error: formatter must be a string"); // 如果不是字符串，抛出报错
 
-        // 格式判断
-        if (formatter === "date") formatter = "yyyy-MM-dd"
-        else if (formatter === "datetime") formatter = "yyyy-MM-dd hh:mm:ss"
-        else if (formatter === "time") formatter = "hh:mm:ss"
+        /* 格式判断 */
+        if (formatter === "date") formatter = "yyyy-MM-dd";
+        else if (formatter === "datetime") formatter = "yyyy-MM-dd hh:mm:ss";
+        else if (formatter === "time") formatter = "hh:mm:ss";
 
         /**
          * 自定义格式化函数
@@ -60,10 +60,12 @@ function formate(date, formatter, isPad = false) {
     };
 
     /* --------------- */
-    // 实际执行效果
+    /* 实际执行效果部分 */
 
-    formatter = _formatNormalize(formatter); // 将传入的格式化字符串或自定义格式化函数全部转为函数，便于后期处理
+    // 格式化字符串处理，确保formatter是一个函数
+    formatter = _formatNormalize(formatter);
 
+    // 定义一个包含日期信息的对象
     const dateInfo = {
         year: date.getFullYear(),
         month: date.getMonth() + 1,
@@ -74,6 +76,7 @@ function formate(date, formatter, isPad = false) {
         second: date.getSeconds(),
     };
 
+    // 将日期信息转化为字符串，并赋给相应的属性
     dateInfo.yyyy = dateInfo.year.toString();
     dateInfo.MM = dateInfo.month.toString();
     dateInfo.dd = dateInfo.date.toString();
@@ -81,6 +84,7 @@ function formate(date, formatter, isPad = false) {
     dateInfo.mm = dateInfo.minute.toString();
     dateInfo.ss = dateInfo.second.toString();
 
+    // 如果isPad为true，则对年份、月份、日期、小时、分钟和秒钟进行补零处理
     if (isPad) dateInfo.yyyy = customPadStart(dateInfo.yyyy, 4),
         dateInfo.MM = customPadStart(dateInfo.MM, 2),
         dateInfo.dd = customPadStart(dateInfo.dd, 2),
@@ -88,10 +92,10 @@ function formate(date, formatter, isPad = false) {
         dateInfo.mm = customPadStart(dateInfo.mm, 2),
         dateInfo.ss = customPadStart(dateInfo.ss, 2)
 
+    // 调用formatter函数，并将dateInfo作为参数传入，得到最终的格式化后的日期字符串
     const result = formatter(dateInfo);
 
-    // console.log(result);
-
+    // 返回格式化后的日期字符串
     return result;
 };
 

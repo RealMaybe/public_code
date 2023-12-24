@@ -1,7 +1,7 @@
 /**
  * 格式化日期和时间。
  * @param { number } value - 表示时间的时间戳（以毫秒为单位）。
- * @param { string } [spe="/"] - 分隔符（默认为斜杠）。
+ * @param { string } [spe = "/"] - 分隔符（默认为斜杠）。
  * @returns { string } - 格式化后的日期和时间字符串。
  */
 function formatDate(value, spe = "/") {
