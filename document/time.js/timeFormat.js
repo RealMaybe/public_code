@@ -6,6 +6,8 @@
  * @returns { string } 格式化后的日期字符串
  */
 function formate(date, formatter, isPad = false) {
+    // 内部公共函数部分
+
     /**
      * 将格式化字符串规范为格式化函数
      * @param { string | function } formatter 格式化字符串或自定义格式化函数
@@ -26,7 +28,18 @@ function formate(date, formatter, isPad = false) {
          * @param { object } dateInfo 日期信息对象
          * @returns { string } 格式化后的日期字符串
          */
-        const formatterFunc = dateInfo => { const { yyyy, MM, dd, hh, mm, ss, ms } = dateInfo; return formatter.replaceAll("yyyy", yyyy).replaceAll("MM", MM).replaceAll("dd", dd).replaceAll("hh", hh).replaceAll("mm", mm).replaceAll("ss", ss).replaceAll("ms", ms) };
+        const formatterFunc = dateInfo => {
+            const { yyyy, MM, dd, hh, mm, ss, ms } = dateInfo;
+
+            return formatter
+                .replaceAll("yyyy", yyyy)
+                .replaceAll("MM", MM)
+                .replaceAll("dd", dd)
+                .replaceAll("hh", hh)
+                .replaceAll("mm", mm)
+                .replaceAll("ss", ss)
+                .replaceAll("ms", ms)
+        };
 
         return formatterFunc;
     };
@@ -46,11 +59,20 @@ function formate(date, formatter, isPad = false) {
         return paddedString + str; // 返回填充后的字符串
     };
 
-    /* ----- */
+    /* --------------- */
+    // 实际执行效果
 
-    formatter = _formatNormalize(formatter);
+    formatter = _formatNormalize(formatter); // 将传入的格式化字符串或自定义格式化函数全部转为函数，便于后期处理
 
-    const dateInfo = { year: date.getFullYear(), month: date.getMonth() + 1, date: date.getDate(), week: date.getDay(), hour: date.getHours(), minute: date.getMinutes(), second: date.getSeconds(), }
+    const dateInfo = {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        date: date.getDate(),
+        week: date.getDay(),
+        hour: date.getHours(),
+        minute: date.getMinutes(),
+        second: date.getSeconds(),
+    };
 
     dateInfo.yyyy = dateInfo.year.toString();
     dateInfo.MM = dateInfo.month.toString();
@@ -59,11 +81,17 @@ function formate(date, formatter, isPad = false) {
     dateInfo.mm = dateInfo.minute.toString();
     dateInfo.ss = dateInfo.second.toString();
 
-    if (isPad) dateInfo.yyyy = customPadStart(dateInfo.yyyy, 4), dateInfo.MM = customPadStart(dateInfo.MM, 2), dateInfo.dd = customPadStart(dateInfo.dd, 2), dateInfo.hh = customPadStart(dateInfo.hh, 2), dateInfo.mm = customPadStart(dateInfo.mm, 2), dateInfo.ss = customPadStart(dateInfo.ss, 2)
+    if (isPad) dateInfo.yyyy = customPadStart(dateInfo.yyyy, 4),
+        dateInfo.MM = customPadStart(dateInfo.MM, 2),
+        dateInfo.dd = customPadStart(dateInfo.dd, 2),
+        dateInfo.hh = customPadStart(dateInfo.hh, 2),
+        dateInfo.mm = customPadStart(dateInfo.mm, 2),
+        dateInfo.ss = customPadStart(dateInfo.ss, 2)
 
     const result = formatter(dateInfo);
 
-    console.log(result);
+    // console.log(result);
+
     return result;
 };
 
@@ -75,11 +103,8 @@ formate(d, "date", 1);
 formate(new Date("2024-8-12"), (d) => {
     const { year } = d;
     const thisYear = new Date().getFullYear();
-    if (year < thisYear) {
-        return `${thisYear - year}年前`
-    } else if (year > thisYear) {
-        return `${year - thisYear}年后`
-    } else {
-        return "今年"
-    }
+
+    if (year < thisYear) return `${thisYear - year}年前`
+    else if (year > thisYear) return `${year - thisYear}年后`
+    else return "今年"
 })

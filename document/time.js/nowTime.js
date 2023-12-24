@@ -15,7 +15,6 @@
 function nowTime(lang = "zh") {
     function e(e) { return e < 10 ? "0" + e : e };
     let d = new Date();
-
     return {
         year: d.getFullYear(),
         month: e(d.getMonth() + 1),
