@@ -1,5 +1,4 @@
 /**
- * deep clone
  * 深度克隆
  * @param { object } obj 
  */

@@ -111,8 +111,7 @@ formate(d, "date", 1);
 formate(new Date("2024-8-12"), (d) => {
     const { year } = d;
     const thisYear = new Date().getFullYear();
-
-    if (year < thisYear) return `${thisYear - year}年前`
-    else if (year > thisYear) return `${year - thisYear}年后`
+    if (year < thisYear) return `${thisYear - year}年前`;
+    else if (year > thisYear) return `${year - thisYear}年后`;
     else return "今年"
 })
