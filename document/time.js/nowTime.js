@@ -13,7 +13,13 @@
  * @property { number | string } sec - 当前秒数。
  */
 function nowTime(lang = "zh") {
-    function e(e) { return e < 10 ? "0" + e : e };
+    /**
+     * 数字补0。
+     * @param { number } n 需要补0的数字
+     * @returns { string | number } 返回补0后的数字字符串或原数字
+     */
+    const e = n => n < 10 ? "0" + n : n;
+
     let d = new Date();
     return {
         year: d.getFullYear(),
@@ -34,4 +40,18 @@ function nowTime(lang = "zh") {
  * hour - 当前小时
  * min - 当前分钟
  * sec - 当前秒数
+ */
+
+/*
+ * function supplement(number) {
+ *     if (number < 10) return "0" + number
+ *     return numbere
+ * }
+ * 
+ * 上面这个函数可以简化为
+ * function e(n) { return n < 10 ? "0" + n : n }
+ * 
+ * 或者写为一个箭头函数
+ * const e = n => n < 10 ? "0" + n : n;
+ * 
  */

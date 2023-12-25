@@ -1,6 +1,9 @@
+# folder
 node_modules/
 .vscode/
 chatAI/
 test/
 framework/
+
+# file
 test.*

@@ -1,9 +1,13 @@
 /**
  * 根据指定格式格式化日期
+ * 
  * @param { Date } date 日期对象
  * @param { string | function } formatter 格式化字符串或自定义格式化函数
  * @param { boolean } [isPad = false]  是否对日期的各个部分进行补零处理，默认为false
  * @returns { string } 格式化后的日期字符串
+ * 
+ * 如果 formatter 传入的值为字符串，则仅可为 "date"，"datetime"，"time"
+ * 如果 formatter 传入的值为函数，则须要在该函数中写明特定的处理方式
  */
 function formate(date, formatter, isPad = false) {
     /* 内部公共函数部分 */
