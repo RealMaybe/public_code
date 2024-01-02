@@ -1,0 +1,158 @@
+/*
+ * @Author: RealMaybe 
+ * @Date: 2023-12-28 13:33:03 
+ * @Last Modified by: RealMaybe
+ * @Last Modified time: 2023-12-28 21:38:09
+ */
+/*
+ * Service Agreement
+ * .less .css
+ *
+ * HTML template format
+ */
+a {
+  cursor: pointer;
+  color: #00a1d6;
+  text-decoration: none;
+}
+ol {
+  margin-left: 20px;
+}
+ol li {
+  width: 100%;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+ol li:last-child {
+  margin: 0;
+}
+ol > li {
+  padding-left: 10px;
+}
+.number {
+  counter-reset: my-counter;
+}
+.number > li::before {
+  content: "(" counter(my-counter) ")";
+  counter-increment: my-counter;
+  margin-right: 10px;
+  height: 100%;
+  float: left;
+}
+/* font */
+html {
+  font-size: 16px !important;
+  color: #000000;
+}
+/* public */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#agreement {
+  min-width: 40%;
+  max-width: 90%;
+  height: auto;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+strong,
+.important {
+  font-weight: bold !important;
+}
+strong *,
+.important * {
+  font-weight: bold !important;
+}
+ul {
+  list-style: none;
+}
+/* page */
+#agreement {
+  width: 1100px;
+}
+#agreement h1,
+#agreement .first-title {
+  line-height: 45px;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: bold !important;
+  width: 100%;
+  text-align: center;
+}
+#agreement h1 *,
+#agreement .first-title * {
+  font-weight: bold !important;
+}
+#agreement h2,
+#agreement .second-title {
+  width: 100%;
+  line-height: 45px;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-weight: bold !important;
+}
+#agreement h2 *,
+#agreement .second-title * {
+  font-weight: bold !important;
+}
+#agreement .time {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+#agreement .time p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 180px;
+  max-width: 300px;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 0 5px;
+  margin-bottom: 5px;
+}
+#agreement .time p:last-child {
+  margin: 0;
+}
+#agreement main {
+  width: 100%;
+  height: auto;
+  font-size: 1rem;
+}
+#agreement main > * {
+  width: 100%;
+}
+#agreement main h3,
+#agreement main .third-title {
+  width: 100%;
+  line-height: 45px;
+  font-size: 1.25rem;
+  margin-bottom: 15px;
+  font-weight: bold !important;
+}
+#agreement main h3 *,
+#agreement main .third-title * {
+  font-weight: bold !important;
+}
+#agreement main p {
+  width: 100%;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+#agreement main p:last-child {
+  margin: 0;
+}
+#agreement main section {
+  margin-bottom: 40px;
+}
+#agreement main section:last-child {
+  margin-bottom: 0;
+}
+#agreement main section > p {
+  text-indent: 2em;
+}

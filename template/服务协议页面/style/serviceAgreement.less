@@ -1,0 +1,137 @@
+/*
+ * @Author: RealMaybe 
+ * @Date: 2023-12-28 13:33:03 
+ * @Last Modified by: RealMaybe
+ * @Last Modified time: 2023-12-28 21:38:09
+ */
+
+/*
+ * Service Agreement
+ * .less .css
+ *
+ * HTML template format
+ */
+
+@import url("./agreementPublicStyle.less");
+
+.number {
+    counter-reset: my-counter;
+    // list-style-type: decimal;
+
+    // &>p::before,
+    &>li::before {
+        content: "(" counter(my-counter) ")";
+        counter-increment: my-counter;
+        margin-right: 10px;
+        height: 100%;
+        float: left;
+    }
+}
+
+// ------------------------------
+
+/* font */
+html {
+    font-size: 16px !important;
+    color: #000000;
+}
+
+// ------------------------------
+
+/* public */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#agreement {
+    min-width: 40%;
+    max-width: 90%;
+    height: auto;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+strong,
+.important {
+    .strong()
+}
+
+ul {
+    list-style: none;
+}
+
+// ------------------------------
+
+/* page */
+#agreement {
+    width: 1100px;
+
+    // title
+    h1,
+    .first-title {
+        .title-1();
+        .tac()
+    }
+
+    h2,
+    .second-title {
+        .title-2()
+    }
+
+    // time
+    .time {
+        width: 100%;
+        .flex-center-start();
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        p {
+            .flex-between-center();
+            min-width: 180px;
+            max-width: 300px;
+            font-size: 14px;
+            line-height: 20px;
+            padding: 0 5px;
+            margin-bottom: 5px;
+
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
+
+    // main
+    main {
+        width: 100%;
+        height: auto;
+        font-size: 1rem;
+
+        &>* {
+            width: 100%;
+        }
+
+        h3,
+        .third-title {
+            .title-3()
+        }
+
+        p {
+            .p()
+        }
+
+        section {
+            margin-bottom: 40px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &>p {
+                text-indent: 2em;
+            }
+        }
+    }
+}

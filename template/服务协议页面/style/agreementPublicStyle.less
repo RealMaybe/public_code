@@ -1,0 +1,142 @@
+// flex
+.flex-center() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-center-end() {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.flex-center-start() {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.flex-between-center() {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-start-center() {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.flex-start-end() {
+    display: flex;
+    justify-content: start;
+    align-items: flex-end;
+}
+
+.flex-end-center() {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+// ------------------------------
+
+// text align
+.tac() {
+    width: 100%;
+    text-align: center;
+}
+
+// ------------------------------
+
+// title fong size
+@title-1-size: 2rem;
+@title-2-size: 1.5rem;
+@title-3-size: 1.25rem;
+
+// title
+.title-1() {
+    width: 100%;
+    line-height: 45px;
+    font-size: @title-1-size;
+    margin-bottom: 30px;
+    .strong();
+}
+
+.title-2() {
+    width: 100%;
+    line-height: 45px;
+    font-size: @title-2-size;
+    margin-bottom: 20px;
+    .strong();
+}
+
+.title-3() {
+    width: 100%;
+    line-height: 45px;
+    font-size: @title-3-size;
+    margin-bottom: 15px;
+    .strong();
+}
+
+// ------------------------------
+
+// tips
+.tips-0() {
+    .strong();
+    text-decoration: underline;
+}
+
+.tips-1() {
+    .strong();
+}
+
+// ------------------------------
+
+// link
+a {
+    cursor: pointer;
+    color: #00a1d6;
+    text-decoration: none;
+}
+
+// ------------------------------
+
+// ol
+ol {
+    margin-left: 20px;
+
+    li {
+        .p()
+    }
+
+    &>li {
+        padding-left: 10px;
+    }
+}
+
+// ------------------------------
+
+// paragraph
+.p() {
+    width: 100%;
+    line-height: 30px;
+    margin-bottom: 10px;
+
+    &:last-child {
+        margin: 0;
+    }
+}
+
+// ------------------------------
+
+// strong
+.strong() {
+    font-weight: bold !important;
+
+    * {
+        font-weight: bold !important;
+    }
+}
