@@ -2,10 +2,10 @@
  * 倒计时函数，用于计算当前时间与指定时间之间的时间差（天、小时、分钟、秒）
  * @param { string } time - 指定时间，格式为 YYYY-MM-DD HH:mm:ss
  * @return { object } 返回一个包含秒、分钟、小时和天数的对象
- * @property { number } seconds - 剩余的秒数
- * @property { number } minutes - 剩余的分钟数
- * @property { number } hours - 剩余的小时数
- * @property { number } days - 剩余的天数
+ * @property { number } second - 剩余的秒数
+ * @property { number } minute - 剩余的分钟数
+ * @property { number } hour - 剩余的小时数
+ * @property { number } day - 剩余的天数
  */
 function countdown(time) {
     /**
@@ -28,9 +28,9 @@ function countdown(time) {
 
     // 使用辅助函数转换为大于等于零的数字并返回
     return {
-        second: e(parseInt(seconds % 60)),
-        minute: e(parseInt(minutes % 60)),
+        day: e(parseInt(days)),
         hour: e(parseInt(hours % 60)),
-        day: e(parseInt(days))
+        minute: e(parseInt(minutes % 60)),
+        second: e(parseInt(seconds % 60)),
     }
 }
