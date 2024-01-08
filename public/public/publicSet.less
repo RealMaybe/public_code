@@ -1,3 +1,5 @@
+// out:false
+
 @charset "UTF-8";
 
 // color
@@ -17,14 +19,6 @@
 @black333: #333;
 @blue-sky: #c2d4e8;
 @background: rgba(234, 237, 241, 1);
-
-/* font */
-html {
-    font-size: 16px !important;
-    color: @black;
-}
-
-@import url("./font.less");
 
 // flex
 .flex-center() {
@@ -67,6 +61,16 @@ html {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+// --------------------
+
+/* font */
+@import url("./font.less");
+
+html {
+    font-size: 16px !important;
+    color: @black;
 }
 
 /* public */
