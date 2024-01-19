@@ -4,6 +4,7 @@ node_modules/
 chatAI/
 test/
 framework/
+libraries/
 
 # file
 test.*
