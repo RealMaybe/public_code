@@ -7,12 +7,19 @@
 function StorageAPI(storageType) {
     // 根据环境和存储类型选择合适的存储对象
     let storage = (function() {
-        // H5+app 环境
-        if (window.plus && window.plus.storage) return storageType === "session" ? plus.storage : plus.storage.getStorageSync();
-
         // 浏览器环境
-        else return storageType === "session" ? sessionStorage : localStorage;
+        if (!window.plus)
+            return storageType === "session" ? sessionStorage : localStorage;
+
+        // H5+app 环境
+        else if (window.plus && window.plus.storage)
+            return storageType === "session" ? plus.storage : plus.storage.getStorageSync();
+
+        // 其他情况
+        else
+            throw new Error("Unknown environment, unable to determine storage method.");
     })()
+
 
     /**
      * 设置或获取存储数据
