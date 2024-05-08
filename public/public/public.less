@@ -1,7 +1,11 @@
+// out: false
+
 @charset "UTF-8";
 
-// color
-@import url("./color.less");
+/* color */
+@import url("./color.less"); // 公共色
+
+// 自定义颜色
 
 @white255: rgba(255, 255, 255, 1);
 @white248: rgba(248, 248, 248, 1);
@@ -18,9 +22,9 @@
 @black444: #444;
 @black333: #333;
 @blue-sky: #c2d4e8;
-@background: rgba(234, 237, 241, 1);
 
-// flex
+
+/* flex */
 .flex-center() {
     display: flex;
     justify-content: center;
@@ -45,6 +49,24 @@
     align-items: center;
 }
 
+.flex-between-start() {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.flex-between-end() {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.flex-start() {
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+}
+
 .flex-start-center() {
     display: flex;
     justify-content: start;
@@ -55,6 +77,12 @@
     display: flex;
     justify-content: start;
     align-items: flex-end;
+}
+
+.flex-end-start() {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
 }
 
 .flex-end-center() {

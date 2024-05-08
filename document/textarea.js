@@ -74,9 +74,12 @@ function autoTextarea(options, element) {
  */
 function getFormatCode(strValue) { return strValue.replace(/\r\n/g, "<br/>").replace(/\n/g, "<br/>").replace(/\s/g, " ") };
 
-function getFormatCode(strValue) { return `<div><p>${strValue.replace(/\r\n/g,"</p><p>").replace(/\n/g,"</p><p>")}</p></div>` };
+function getFormatCode(strValue) { return `<div><p>${strValue.replace(/\r\n/g, "</p><p>").replace(/\n/g, "</p><p>")}</p></div>` };
 
-/* 调用实例 */
+
+/* ====================== 示例 ====================== */
+
+/* 调用示例 */
 $(".textarea").autoTextarea({ maxHeight: 220 });
 
 $("textarea").attr("maxlength", 10000).on("input keyup", function() {
