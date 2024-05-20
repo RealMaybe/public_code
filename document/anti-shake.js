@@ -17,7 +17,9 @@ function debounce(func, delay) {
     }
 };
 
-/* 使用方法实例 */
+/* 
+
+// 使用方法实例
 function handleInput() {
     // 处理输入事件的逻辑
 }
@@ -26,4 +28,6 @@ function handleInput() {
 const debouncedHandleInput = debounce(handleInput, 1000);
 
 // 监听输入框的输入事件，并使用防抖函数处理
-input.addEventListener("input", debouncedHandleInput);
+input.addEventListener("input", debouncedHandleInput); 
+
+*/

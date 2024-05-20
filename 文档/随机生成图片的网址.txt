@@ -1,3 +1,9 @@
-使用方法: https://picsum.photos/宽度/高度
+使用方法: 
+https://picsum.photos/宽度/高度
+https://picsum.photos/宽高
 
-例：https://picsum.photos/1920/1080
+例：
+https://picsum.photos/1920/1080
+https://picsum.photos/1000
+
+如果需要同时用多个，后面可以加个浏览器参数

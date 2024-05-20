@@ -1,5 +1,6 @@
-const rate = r => "★★★★★☆☆☆☆☆".slice(5 - r, 10 - r);
+/* 
 
+const rate = n => "★★★★★☆☆☆☆☆".slice(5 - n, 10 - n);
 
 function rate(n) {
     const star = "★★★★★☆☆☆☆☆";
@@ -8,6 +9,7 @@ function rate(n) {
     else throw new Error("Rating can only be between 0 and 5.")
 }
 
+ */
 
 const rate = n => (n >= 0 && n <= 5) ?
     "★★★★★☆☆☆☆☆".slice(5 - n, 10 - n) :

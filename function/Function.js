@@ -64,3 +64,6 @@ const randomString = () => Math.random().toString(36).slice(2);
 
 // 去掉字符串中的元素标记
 const removeTag = fragment => new DOMParser().parseFromString(fragment, "text/html").body.textContent || "";
+
+// 判断奇偶数
+const isEven = n => (n % 2 === 1 || n % 2 === -1);
