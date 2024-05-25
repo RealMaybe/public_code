@@ -17,17 +17,21 @@ function debounce(func, delay) {
     }
 };
 
-/* 
+/**
+ * 节流函数，限制函数的执行频率，在一定时间段内只执行一次。
+ * @param { Function } func 要执行的函数
+ * @param { number } delay 延迟的毫秒数
+ * @returns { Function } 具有节流功能的函数
+ */
+function throttle(func, delay) {
+    let lastExecuted = 0;
 
-// 使用方法实例
-function handleInput() {
-    // 处理输入事件的逻辑
+    return function() {
+        const now = Date.now();
+
+        if (now - lastExecuted >= delay) {
+            func.apply(this, arguments);
+            lastExecuted = now;
+        }
+    };
 }
-
-// 通过防抖函数创建一个具有延迟功能的处理函数
-const debouncedHandleInput = debounce(handleInput, 1000);
-
-// 监听输入框的输入事件，并使用防抖函数处理
-input.addEventListener("input", debouncedHandleInput); 
-
-*/

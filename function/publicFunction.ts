@@ -31,7 +31,15 @@ function listGetRandomItem<T>(list: T[], remove: boolean = false): T {
  * @property { number | string } min - 当前分钟。
  * @property { number | string } sec - 当前秒数。
  */
-function nowTime(lang: string = "zh"): object {
+function nowTime(lang: string = "zh"): {
+    year: number,
+    month: number | string,
+    date: number | string,
+    week: number | string,
+    hour: number | string,
+    min: number | string,
+    sec: number | string
+} {
     function e(e: number): number | string { return e < 10 ? "0" + e : e };
     let d: Date = new Date();
 
@@ -41,7 +49,7 @@ function nowTime(lang: string = "zh"): object {
         date: e(d.getDate()),
         week: "zh" === lang ? `星期${["日", "一", "二", "三", "四", "五", "六"][d.getDay()]}` :
             "en" === lang ? `${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][d.getDay()]}` :
-            "jp" === lang ? `${["日", "月", "火", "水", "木", "金", "土"][d.getDay()]}曜日` : d.getDay(),
+                "jp" === lang ? `${["日", "月", "火", "水", "木", "金", "土"][d.getDay()]}曜日` : d.getDay(),
         hour: e(d.getHours()),
         min: e(d.getMinutes()),
         sec: e(d.getSeconds())
@@ -206,6 +214,8 @@ function arrayDeduplication<T>(array: T[]): T[] {
     return newArr.sort((a: any, b: any) => a - b);
 };
 
+
+
 /**
  * 自适应高度的 textarea 输入框
  * @param { number | { "maxHeight": number, "minHeight": number} } options 配置项，可以是一个数字（表示最大高度），或者一个包含最大高度和最小高度的对象
@@ -262,6 +272,46 @@ function autoTextarea(options: number | {
 
 /* ---------- */
 
+/**
+ * 防抖函数，限制函数的执行频率，只在特定时间段后执行最后一次触发的事件。
+ * @param { Function } func 要执行的函数
+ * @param { number } delay 延迟的毫秒数
+ * @returns { Function } 具有防抖功能的函数
+ */
+function debounce(func: Function, delay: number): Function {
+    let timerId: any; // 记录计时器 ID
+
+    return function (this: any, ...args: any) {
+        clearTimeout(timerId); // 清除之前的计时器
+
+        // 设置新的计时器，经过指定时间后执行函数
+        timerId = setTimeout(() => {
+            func.apply(this, args) // 执行函数
+        }, delay);
+    }
+};
+
+/**
+ * 节流函数，限制函数的执行频率，在一定时间段内只执行一次。
+ * @param { Function } func 要执行的函数
+ * @param { number } delay 延迟的毫秒数
+ * @returns { Function } 具有节流功能的函数
+ */
+function throttle(func: Function, delay: number): Function {
+    let lastExecuted: number = 0;
+
+    return function (this: any) {
+        const now: number = Date.now();
+
+        if (now - lastExecuted >= delay) {
+            func.apply(this, arguments);
+            lastExecuted = now;
+        }
+    };
+}
+
+/* ---------- */
+
 /* 导出相关函数 */
 export {
     listGetRandomItem, // 随机获取数组元素
@@ -271,4 +321,6 @@ export {
     customPadStart, // padStart 在字符串的开头填充指定的字符, 使字符串达到指定的长度
     arrayDeduplication, // 数组去重
     autoTextarea, //  textarea 输入框自适应高度
+    debounce, // 防抖函数
+    throttle, // 节流函数
 }
