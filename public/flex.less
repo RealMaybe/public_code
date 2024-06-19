@@ -93,3 +93,11 @@
     justify-content: flex-end;
     align-items: flex-end;
 }
+
+// 可自行编辑的 flex 样式
+.flex(@jc, @ai, @fd) {
+    display: flex;
+    justify-content: @jc;
+    align-items: @ai;
+    flex-direction: @fd;
+}

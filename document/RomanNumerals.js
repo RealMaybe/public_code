@@ -1,3 +1,4 @@
+/* 阿拉伯数字转罗马数字 */
 class Solution {
     constructor() {}
 
@@ -21,4 +22,4 @@ class Solution {
 
 // 使用示例  
 let sol = new Solution();
-console.log(sol.intToRoman(100)); // 输出应为 "MCCXXXIV"
+console.log(sol.intToRoman(80)); // 输出应为 "MCCXXXIV"

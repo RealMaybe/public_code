@@ -1,0 +1,47 @@
+// Define breakpoints as a map
+@breakpoints: {
+    phone: (320px, 480px);
+    pad: (481px, 768px);
+    notebook: (769px, 1024px);
+    desktop: (1025px, 1200px);
+    tv: 1201px
+}
+
+// Mixin to respond to a breakpoint
+@mixin respond-to($breakpoint) {
+    // Get the breakpoint details
+    $bp =map-get($breakpoints, $breakpoint);
+
+    // Check if the breakpoint is a list (e.g., for range of breakpoints)
+    @if type-of($bp)=='list' {
+        // Get the minimum and maximum breakpoint values
+        $min =nth($bp, 1);
+        $max =nth($bp, 2);
+
+        // Use media query for range
+        @media (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    }
+
+    @else {
+
+        // Use media query for single breakpoint
+        @media (min-width: $bp) {
+            @content;
+        }
+    }
+}
+
+// Use the mixin for different breakpoints
+.header {
+    width: 100%;
+
+    @include respond-to("phone") {
+        height: 50px;
+    }
+
+    @include respond-to("pad") {
+        height: 80px;
+    }
+}
